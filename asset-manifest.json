@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/hockey-counter/static/css/main.0f74486a.css",
+    "main.js": "/hockey-counter/static/js/main.2b3c019a.js",
+    "index.html": "/hockey-counter/index.html",
+    "main.0f74486a.css.map": "/hockey-counter/static/css/main.0f74486a.css.map",
+    "main.2b3c019a.js.map": "/hockey-counter/static/js/main.2b3c019a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0f74486a.css",
+    "static/js/main.2b3c019a.js"
+  ]
+}
