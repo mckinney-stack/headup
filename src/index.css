@@ -1,3 +1,7 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
 body{
     margin: 0 auto;
     height: 100vh;
@@ -7,11 +11,15 @@ body{
     justify-content: center;
 }
 
-h5 {
+h1 {
     display: block;
     font-size: 200px;
     font-weight: 600;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0 auto;
+    text-align: center;
 }
 
+.timer {
+    text-align: center;
+    margin: 24px auto;
+}
