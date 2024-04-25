@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-function StickhandleType({isActive, reset}) {
-
-    const types = ['Wide', 'Narrow', 'Figure Eight', 'Freestyle', 'Toe Drag'];
-    const [type, setType] = useState(types[Math.floor(Math.random() * types.length)]);
+function StickhandleType({types, type, setType, isActive}) {
 
     useEffect(() => {
         let timeoutId;
@@ -13,7 +10,7 @@ function StickhandleType({isActive, reset}) {
             }, 8000);
         }
         return () => clearTimeout(timeoutId);
-    }, [isActive, type]);
+    }, [isActive, type, types, setType]);
 
     return <h1>{type}</h1>;
 }

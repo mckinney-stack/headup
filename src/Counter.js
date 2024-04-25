@@ -1,10 +1,6 @@
-import { useState } from 'react';
+import React from 'react';
 
-function Counter({isActive, reset}){
-
-    console.log("Counter Rendered");
-
-    const [number, updateNumber] = useState(0);
+function Counter({number, updateNumber, isActive, reset}){
 
     if (isActive) {
         setTimeout(() => {
@@ -20,12 +16,4 @@ function Counter({isActive, reset}){
 
 export default Counter;
 
-/*
 
-Please note that you would need to modify the StickhandleType and 
-Counter components to accept and use these props. They should 
-start their cycles when isActive is true and stop their cycles 
-when isActive is false. They should also reset their states when 
-the reset function is called.
-
-*/
