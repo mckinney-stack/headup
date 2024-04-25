@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react';
 
-function StickhandleType({types, type, setType, isActive}) {
+function StickhandleType({isActive, type, types, setType}) {
 
     useEffect(() => {
         let timeoutId;
         if (isActive) {
             timeoutId = setTimeout(() => {
-                setType(types[Math.floor(Math.random() * types.length)]);
+                let newType;
+                do {
+                    newType = types[Math.floor(Math.random() * types.length)];
+                } while (newType === type);
+                setType(newType);
             }, 8000);
         }
         return () => clearTimeout(timeoutId);
-    }, [isActive, type, types, setType]);
+    }, [isActive, type, setType]);
 
     return <h1>{type}</h1>;
 }
