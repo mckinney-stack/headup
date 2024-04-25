@@ -8,6 +8,7 @@ function App() {
     const types = ['Wide', 'Tight', 'Figure Eight', 'Freestyle', 'Toe Drag'];
 
     const [seconds, setSeconds] = useState(0);
+    const [milliseconds, setMilliseconds] = useState(0);
     const [isActive, setIsActive] = useState(false);
     const [isGameOver, setIsGameOver] = useState(false);
     const [number, updateNumber] = useState(0);
@@ -17,15 +18,15 @@ function App() {
     const [isCountdownOver, setIsCountdownOver] = useState(false);
     const [isFirstRender, setIsFirstRender] = useState(true);
   
-    function toggle() {
+    function handlePlay() {
     setIsFirstRender(false);
     setIsActive(!isActive);
-    setCountdown(3);
     if (isActive) {
       setIsStarting(false);
     } else if (!isActive) {
       setIsStarting(true);
     }
+    setCountdown(3);
     const countdownInterval = setInterval(() => {
       setCountdown((prevCountdown) => prevCountdown - 1);
     }, 1000);
@@ -35,30 +36,50 @@ function App() {
       clearInterval(countdownInterval);
     }, 3000);
   }
+ 
+  function handleStop() {
+    setIsActive(false);
+  }
   
-    useEffect(() => {
-      let interval = null;
-      if (isActive && isCountdownOver) {
+  useEffect(() => {
+    let interval = null;
+    if (isActive && isCountdownOver) {
         interval = setInterval(() => {
-          setSeconds(seconds => seconds + 1);
-        }, 1000);
+            setMilliseconds(milliseconds => milliseconds + 1);
+            if (milliseconds % 1000 === 0) {
+                setSeconds(seconds => seconds + 1);
+            }
+        }, 1);
         setIsGameOver(false);
-      } else if (!isActive && seconds !== 0) {
+    } else if (!isActive && seconds !== 0) {
         clearInterval(interval);
         updateNumber(0);
         setIsGameOver(true);
-      }
-      return () => clearInterval(interval);
-    }, [isActive, isCountdownOver, seconds, number, isGameOver]);
+    }
+    return () => clearInterval(interval);
+}, [isActive, isCountdownOver, seconds, milliseconds, number, isGameOver]);
 
     function reset() {
       setSeconds(0);
+      setMilliseconds(0);
       updateNumber(0);
       setIsActive(false);
       setIsFirstRender(true);
       setIsStarting(false);
       setIsCountdownOver(false);
     }
+
+    function formatTime(seconds, milliseconds) {
+      const minutes = Math.floor(seconds / 60);
+      const remainingSeconds = seconds % 60;
+      const remainingMilliseconds = Math.floor(milliseconds % 1000 / 10);
+  
+      const minutesStr = String(minutes).padStart(2, '0');
+      const secondsStr = String(remainingSeconds).padStart(2, '0');
+      const millisecondsStr = String(remainingMilliseconds).padStart(2, '0');
+  
+      return `${minutesStr}:${secondsStr}:${millisecondsStr}s`;
+  }
   
     return (
       <>
@@ -79,7 +100,7 @@ function App() {
         ) : (
           <h1>GAME OVER</h1>
         )}
-        <Timer seconds={seconds} isActive={isActive} handleToggle={toggle} handleReset={reset} />
+        <Timer seconds={formatTime(seconds, milliseconds)} isActive={isActive} isFirstRender={isFirstRender} handlePlay={handlePlay} handleStop={handleStop} handleReset={reset} />
       </>
     );
   }
