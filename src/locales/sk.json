@@ -1,12 +1,11 @@
 {
     "getReady": "Pripravte sa...",
-    "headUp": "Hlava Hore",
+    "headUp": "HLAVA HORE",
     "gameOver": "Koniec hry.",
     "wide": "Široký",
-    "tight": "Tesný",
+    "narrow": "Úzky",
     "figureEight": "Osemka",
     "freestyle": "Voľný štýl",
-    "toeDrag": "Ťahanie za prst",
     "leftLeg": "Ľavá noha",
     "rightLeg": "Pravá noha"
 }

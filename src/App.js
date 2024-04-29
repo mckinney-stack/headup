@@ -8,11 +8,9 @@ import { FormattedMessage } from 'react-intl';
 import Language from './Language';
 
 
-
 function App() {
 
-
-    const types = ['wide', 'tight', 'figureEight', 'freestyle', 'toeDrag', 'leftLeg', 'rightLeg'];
+    const types = ['wide', 'narrow', 'figureEight', 'freestyle', 'leftLeg', 'rightLeg'];
 
     const { locale, selectLanguage } = useContext(LanguageContext);
     const [seconds, setSeconds] = useState(0);

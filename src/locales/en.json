@@ -3,10 +3,9 @@
     "headUp": "HEAD UP",
     "gameOver": "GAME OVER",
     "wide": "Wide",
-    "tight": "Tight",
+    "narrow": "Narrow",
     "figureEight": "Figure Eight",
     "freestyle": "Freestyle",
-    "toeDrag": "Toe Drag", 
     "leftLeg": "Left Leg",
     "rightLeg": "Right Leg"
 }
