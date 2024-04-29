@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react';
 import Counter from './Counter';
 import StickhandleType from './StickhandleType';
 import Timer from './Timer';
+import { useContext } from 'react';
+import { LanguageContext } from './LanguageContext';
+import { FormattedMessage } from 'react-intl';
+import Language from './Language';
+
+
 
 function App() {
 
-    const types = ['Wide', 'Tight', 'Figure Eight', 'Freestyle', 'Toe Drag'];
 
+    const types = ['wide', 'tight', 'figureEight', 'freestyle', 'toeDrag', 'leftLeg', 'rightLeg'];
+
+    const { locale, selectLanguage } = useContext(LanguageContext);
     const [seconds, setSeconds] = useState(0);
     const [milliseconds, setMilliseconds] = useState(0);
     const [isActive, setIsActive] = useState(false);
@@ -85,7 +93,9 @@ function App() {
       <>
         {isStarting ? (
           <>
-            <h1>Get ready...</h1>
+            <h1>
+              <FormattedMessage id="getReady" />
+            </h1>
             <h1>{countdown}</h1>
           </>
         ) : isActive ? (
@@ -95,12 +105,17 @@ function App() {
           </>
         ) : isFirstRender ? (
           <>
-          <h1>HEADSUP</h1>
+          <h1>
+            <FormattedMessage id="headUp" />
+          </h1>
           </>
         ) : (
-          <h1>GAME OVER</h1>
+          <h1>
+            <FormattedMessage id="gameOver" />
+          </h1>
         )}
         <Timer seconds={formatTime(seconds, milliseconds)} isActive={isActive} isFirstRender={isFirstRender} handlePlay={handlePlay} handleStop={handleStop} handleReset={reset} />
+        <Language />
       </>
     );
   }

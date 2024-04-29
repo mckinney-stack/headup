@@ -1,9 +1,12 @@
 import './index.css';
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import App from './App';
+import { LanguageProvider } from './LanguageProvider';
 
-const el = document.getElementById('root');
-const root = ReactDOM.createRoot(el);
-
-root.render(<App />);
+ReactDOM.render(
+  <LanguageProvider>
+    <App />
+  </LanguageProvider>,
+  document.getElementById('root')
+);
