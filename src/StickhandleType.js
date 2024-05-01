@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { StyledH1 } from './StyledComponents.js';
+import { StyledH3 } from './StyledComponents.js';
 
 function StickhandleType({isActive, type, types, setType}) {
 
@@ -18,7 +18,7 @@ function StickhandleType({isActive, type, types, setType}) {
         return () => clearTimeout(timeoutId);
     }, [isActive, type, setType]);
 
-    return <StyledH1><FormattedMessage id={type} /></StyledH1>;
+    return <StyledH3><FormattedMessage id={type} /></StyledH3>;
 }
 
 export default StickhandleType;
