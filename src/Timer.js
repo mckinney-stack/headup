@@ -1,6 +1,13 @@
+import styled from 'styled-components';
+
+const StyledTimer = styled.div`
+  text-align: center;
+  margin: 24px auto 96px auto;
+`;
+
 export default function Timer({ seconds, isActive, isFirstRender, handlePlay, handleStop, handleReset }) {
   return (
-    <div class="timer">
+    <StyledTimer>
       <div>{seconds}</div>
       {isFirstRender ? (
         <button onClick={handlePlay}>Play</button>
@@ -9,6 +16,6 @@ export default function Timer({ seconds, isActive, isFirstRender, handlePlay, ha
       ) : (
         <button onClick={handleReset}>Reset</button>
       )}
-    </div>
+    </StyledTimer>
   );
 }

@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { LanguageContext } from './LanguageContext';
 import { FormattedMessage } from 'react-intl';
 import Language from './Language';
-
+import { StyledH1, StyledFaHockeyPuck } from './StyledComponents';
 
 function App() {
 
@@ -91,10 +91,10 @@ function App() {
       <>
         {isStarting ? (
           <>
-            <h1>
-              <FormattedMessage id="getReady" />
-            </h1>
-            <h1>{countdown}</h1>
+            <StyledH1>
+              <FormattedMessage id="getReady" /><StyledFaHockeyPuck /><StyledFaHockeyPuck /><StyledFaHockeyPuck />
+            </StyledH1>
+            <StyledH1>{countdown}</StyledH1>
           </>
         ) : isActive ? (
           <>
@@ -103,14 +103,14 @@ function App() {
           </>
         ) : isFirstRender ? (
           <>
-          <h1>
-            <FormattedMessage id="headUp" />
-          </h1>
+          <StyledH1>
+            <FormattedMessage id="headUp" /><StyledFaHockeyPuck />
+          </StyledH1>
           </>
         ) : (
-          <h1>
-            <FormattedMessage id="gameOver" />
-          </h1>
+          <StyledH1>
+            <FormattedMessage id="gameOver" /><StyledFaHockeyPuck />
+          </StyledH1>
         )}
         <Timer seconds={formatTime(seconds, milliseconds)} isActive={isActive} isFirstRender={isFirstRender} handlePlay={handlePlay} handleStop={handleStop} handleReset={reset} />
         <Language />

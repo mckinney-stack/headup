@@ -2,7 +2,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body{
+body {
     margin: 0 auto;
     height: 100vh;
     width: 100vw;
@@ -11,21 +11,12 @@ body{
     justify-content: center;
 }
 
-h1 {
-    display: block;
-    font-size: 200px;
-    font-weight: 600;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.timer {
-    text-align: center;
-    margin: 24px auto 96px auto;
-}
-
-.language {
+/* .language {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+div.language h5 {
+    margin-right: 8px;
+} */
