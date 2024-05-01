@@ -10,6 +10,14 @@ export const StyledH1 = styled.h1`
   text-align: center;
 `;
 
+export const StyledH6 = styled.h6`
+  display: block;
+  font-size: 64px;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+`;
+
 export const StyledFaHockeyPuck = styled(FaHockeyPuck)`
     position: relative;
     height: 40px;

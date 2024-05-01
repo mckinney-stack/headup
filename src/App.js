@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { LanguageContext } from './LanguageContext';
 import { FormattedMessage } from 'react-intl';
 import Language from './Language';
-import { StyledH1, StyledFaHockeyPuck } from './StyledComponents';
+import { StyledH1, StyledH6, StyledFaHockeyPuck } from './StyledComponents';
 
 function App() {
 
@@ -91,9 +91,9 @@ function App() {
       <>
         {isStarting ? (
           <>
-            <StyledH1>
-              <FormattedMessage id="getReady" /><StyledFaHockeyPuck /><StyledFaHockeyPuck /><StyledFaHockeyPuck />
-            </StyledH1>
+            <StyledH6>
+              <FormattedMessage id="getReady" />
+            </StyledH6>
             <StyledH1>{countdown}</StyledH1>
           </>
         ) : isActive ? (
