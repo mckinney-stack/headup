@@ -2,11 +2,34 @@ import React, { useState, useEffect } from 'react';
 import Counter from './Counter';
 import StickhandleType from './StickhandleType';
 import Timer from './Timer';
+import UserName from './UserName';
 import { useContext } from 'react';
 import { LanguageContext } from './LanguageContext';
 import { FormattedMessage } from 'react-intl';
 import Language from './Language';
 import { StyledH1, StyledH6, StyledFaHockeyPuck, StyledFaHockeyPuckIn, StyledFaHockeyPuckOut } from './StyledComponents';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyByu8fnO6M-GQszcDFGkDCtV9nfoDI81qA",
+  authDomain: "head-up-6f17c.firebaseapp.com",
+  projectId: "head-up-6f17c",
+  storageBucket: "head-up-6f17c.appspot.com",
+  messagingSenderId: "98025372188",
+  appId: "1:98025372188:web:17321f0c8a3425d9947dd9",
+  measurementId: "G-B59FYS44L2"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 
 function App() {
 
@@ -23,6 +46,7 @@ function App() {
     const [countdown, setCountdown] = useState(3);
     const [isCountdownOver, setIsCountdownOver] = useState(false);
     const [isFirstRender, setIsFirstRender] = useState(true);
+    const [userName, setUserName] = useState('');
   
     function handlePlay() {
     setIsFirstRender(false);
@@ -45,6 +69,19 @@ function App() {
  
   function handleStop() {
     setIsActive(false);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  
+    // // Get a reference to the database service
+    // const database = getDatabase();
+  
+    // // Write data
+    // set(ref(database, 'users/' + name), {
+    //   username: name,
+    //   time: seconds
+    // });
   }
   
   useEffect(() => {
@@ -114,6 +151,7 @@ function App() {
         )}
         <Timer seconds={formatTime(seconds, milliseconds)} isActive={isActive} isFirstRender={isFirstRender} handlePlay={handlePlay} handleStop={handleStop} handleReset={reset} />
         <Language />
+        <UserName userName={userName} setUserName={setUserName} onSubmit={handleSubmit}/>
       </>
     );
   }

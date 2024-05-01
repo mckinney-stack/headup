@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
+
 
 const StyledTimer = styled.div`
   text-align: center;
@@ -10,11 +12,11 @@ export default function Timer({ seconds, isActive, isFirstRender, handlePlay, ha
     <StyledTimer>
       <div>{seconds}</div>
       {isFirstRender ? (
-        <button onClick={handlePlay}>Play</button>
+        <button onClick={handlePlay}><FormattedMessage id="play" /></button>
       ) : isActive ? (
-        <button onClick={handleStop}>Stop</button>
+        <button onClick={handleStop}><FormattedMessage id="stop" /></button>
       ) : (
-        <button onClick={handleReset}>Reset</button>
+        <button onClick={handleReset}><FormattedMessage id="reset" /></button>
       )}
     </StyledTimer>
   );
