@@ -8,27 +8,23 @@ import { LanguageContext } from './LanguageContext';
 import { FormattedMessage } from 'react-intl';
 import Language from './Language';
 import { StyledH1, StyledH6, StyledFaHockeyPuck, StyledFaHockeyPuckIn, StyledFaHockeyPuckOut } from './StyledComponents';
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getDatabase, ref, set } from "firebase/database";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyByu8fnO6M-GQszcDFGkDCtV9nfoDI81qA",
-  authDomain: "head-up-6f17c.firebaseapp.com",
-  projectId: "head-up-6f17c",
-  storageBucket: "head-up-6f17c.appspot.com",
-  messagingSenderId: "98025372188",
-  appId: "1:98025372188:web:17321f0c8a3425d9947dd9",
-  measurementId: "G-B59FYS44L2"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const database = getDatabase(app);
 
 
 function App() {
@@ -36,6 +32,7 @@ function App() {
     const types = ['wide', 'narrow', 'figureEight', 'freestyle', 'leftLeg', 'rightLeg'];
 
     const { locale, selectLanguage } = useContext(LanguageContext);
+
     const [seconds, setSeconds] = useState(0);
     const [milliseconds, setMilliseconds] = useState(0);
     const [isActive, setIsActive] = useState(false);
@@ -47,6 +44,8 @@ function App() {
     const [isCountdownOver, setIsCountdownOver] = useState(false);
     const [isFirstRender, setIsFirstRender] = useState(true);
     const [userName, setUserName] = useState('');
+
+    const userTime = formatTime(seconds, milliseconds);
   
     function handlePlay() {
     setIsFirstRender(false);
@@ -66,23 +65,34 @@ function App() {
       clearInterval(countdownInterval);
     }, 3000);
   }
- 
-  function handleStop() {
-    setIsActive(false);
-  }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function formatTime(seconds, milliseconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const remainingMilliseconds = Math.floor(milliseconds % 1000 / 10);
+
+    const minutesStr = String(minutes).padStart(2, '0');
+    const secondsStr = String(remainingSeconds).padStart(2, '0');
+    const millisecondsStr = String(remainingMilliseconds).padStart(2, '0');
+
+    return `${minutesStr}:${secondsStr}:${millisecondsStr}s`;
+}
+ 
+function handleStop(userName, userTime) {
+  setIsActive(false);
   
-    // // Get a reference to the database service
-    // const database = getDatabase();
-  
-    // // Write data
-    // set(ref(database, 'users/' + name), {
-    //   username: name,
-    //   time: seconds
-    // });
-  }
+  // Write data to firebase
+  set(ref(database, 'users/' + userName), {
+    username: userName,
+    time: userTime
+  })
+  .then(() => {
+    console.log("Data written successfully!");
+  })
+  .catch((error) => {
+    console.error("Error writing data: ", error);
+  });
+}
   
   useEffect(() => {
     let interval = null;
@@ -110,19 +120,8 @@ function App() {
       setIsFirstRender(true);
       setIsStarting(false);
       setIsCountdownOver(false);
+      setUserName('');
     }
-
-    function formatTime(seconds, milliseconds) {
-      const minutes = Math.floor(seconds / 60);
-      const remainingSeconds = seconds % 60;
-      const remainingMilliseconds = Math.floor(milliseconds % 1000 / 10);
-  
-      const minutesStr = String(minutes).padStart(2, '0');
-      const secondsStr = String(remainingSeconds).padStart(2, '0');
-      const millisecondsStr = String(remainingMilliseconds).padStart(2, '0');
-  
-      return `${minutesStr}:${secondsStr}:${millisecondsStr}s`;
-  }
   
     return (
       <>
@@ -149,9 +148,9 @@ function App() {
             <FormattedMessage id="gameOver" /><StyledFaHockeyPuckOut />
           </StyledH1>
         )}
-        <Timer seconds={formatTime(seconds, milliseconds)} isActive={isActive} isFirstRender={isFirstRender} handlePlay={handlePlay} handleStop={handleStop} handleReset={reset} />
+        <Timer userTime={userTime} isActive={isActive} isFirstRender={isFirstRender} handlePlay={handlePlay} handleStop={handleStop} handleReset={reset} userName={userName} />
         <Language />
-        <UserName userName={userName} setUserName={setUserName} onSubmit={handleSubmit}/>
+        <UserName userName={userName} setUserName={setUserName} />
       </>
     );
   }

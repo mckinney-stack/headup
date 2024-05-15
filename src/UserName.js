@@ -18,7 +18,11 @@ const UserInput = styled.input`
   margin-right: -8px;
 `;
 
-export default function UserName({userName, setUserName, handleSubmit}) {
+function handleSubmit(e) {
+  e.preventDefault();
+}
+
+export default function UserName({userName, setUserName}) {
     return ( 
     <UserNameContainer onSubmit={handleSubmit}>
     <UserHeading>
