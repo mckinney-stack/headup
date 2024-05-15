@@ -7,14 +7,14 @@ const StyledTimer = styled.div`
   margin: 24px auto 96px auto;
 `;
 
-export default function Timer({ userTime, isActive, isFirstRender, handlePlay, handleStop, handleReset, userName }) {
+export default function Timer({ userTime, isActive, isFirstRender, handlePlay, handleStop, handleReset, userName, isCountdownOver }) {
   return (
     <StyledTimer>
       <div>{userTime}</div>
       {isFirstRender ? (
         <button onClick={handlePlay}><FormattedMessage id="play" /></button>
       ) : isActive ? (
-        <button onClick={() => handleStop(userName, userTime)}><FormattedMessage id="stop" /></button>
+        <button onClick={() => handleStop(userName, userTime, isCountdownOver)}><FormattedMessage id="stop" /></button>
       ) : (
         <button onClick={handleReset}><FormattedMessage id="reset" /></button>
       )}

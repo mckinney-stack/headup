@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Counter from './Counter';
 import StickhandleType from './StickhandleType';
 import Timer from './Timer';
@@ -46,25 +46,27 @@ function App() {
     const [userName, setUserName] = useState('');
 
     const userTime = formatTime(seconds, milliseconds);
+
+    const countdownIntervalRef = useRef(null);
+    const countdownTimeoutRef = useRef(null);
   
     function handlePlay() {
-    setIsFirstRender(false);
-    setIsActive(!isActive);
-    if (isActive) {
-      setIsStarting(false);
-    } else if (!isActive) {
-      setIsStarting(true);
+      setIsFirstRender(false);
+      setIsActive(!isActive);
+      if (isActive) {
+        setIsStarting(false);
+      } else if (!isActive) {
+        setIsStarting(true);
+      }
+      countdownIntervalRef.current = setInterval(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
+      countdownTimeoutRef.current = setTimeout(() => {
+        setIsStarting(false);
+        setIsCountdownOver(true);
+        clearInterval(countdownIntervalRef.current);
+      }, 3000);
     }
-    setCountdown(3);
-    const countdownInterval = setInterval(() => {
-      setCountdown((prevCountdown) => prevCountdown - 1);
-    }, 1000);
-    setTimeout(() => {
-      setIsStarting(false);
-      setIsCountdownOver(true);
-      clearInterval(countdownInterval);
-    }, 3000);
-  }
 
   function formatTime(seconds, milliseconds) {
     const minutes = Math.floor(seconds / 60);
@@ -78,9 +80,23 @@ function App() {
     return `${minutesStr}:${secondsStr}:${millisecondsStr}s`;
 }
  
-function handleStop(userName, userTime) {
+function handleStop(userName, userTime, isCountdownOver) {
   setIsActive(false);
+
+  if (countdownIntervalRef.current) {
+    clearInterval(countdownIntervalRef.current);
+  }
+  if (countdownTimeoutRef.current) {
+    clearTimeout(countdownTimeoutRef.current);
+  }
+
+  if (!isCountdownOver) {
+    reset();
+    return;
+  }
   
+  console.log('hello');
+
   // Write data to firebase
   set(ref(database, 'users/' + userName), {
     username: userName,
@@ -113,13 +129,21 @@ function handleStop(userName, userTime) {
 }, [isActive, isCountdownOver, seconds, milliseconds, number, isGameOver]);
 
     function reset() {
+      if (countdownIntervalRef.current) {
+        clearInterval(countdownIntervalRef.current);
+      }
+      if (countdownTimeoutRef.current) {
+        clearTimeout(countdownTimeoutRef.current);
+      }
       setSeconds(0);
       setMilliseconds(0);
-      updateNumber(0);
       setIsActive(false);
-      setIsFirstRender(true);
+      updateNumber(0);
+      setType(types[Math.floor(Math.random() * types.length)]);
       setIsStarting(false);
+      setCountdown(3);
       setIsCountdownOver(false);
+      setIsFirstRender(true);
       setUserName('');
     }
   
@@ -148,7 +172,7 @@ function handleStop(userName, userTime) {
             <FormattedMessage id="gameOver" /><StyledFaHockeyPuckOut />
           </StyledH1>
         )}
-        <Timer userTime={userTime} isActive={isActive} isFirstRender={isFirstRender} handlePlay={handlePlay} handleStop={handleStop} handleReset={reset} userName={userName} />
+        <Timer userTime={userTime} isActive={isActive} isFirstRender={isFirstRender} handlePlay={handlePlay} handleStop={handleStop} handleReset={reset} userName={userName} isCountdownOver={isCountdownOver} />
         <Language />
         <UserName userName={userName} setUserName={setUserName} />
       </>

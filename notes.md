@@ -133,3 +133,15 @@ export default ChallengePhase;
 In this example, `Howl` is used to create a sound object with the specified options. The sound is played when the `phase` changes to `'closeEyes'`. The `unload` method is called to clean up the sound object when the component unmounts, which is important to prevent memory leaks.
 
 Remember to handle the user's interaction with your application before playing any audio to comply with browser policies regarding autoplaying sounds.
+
+
+
+### next steps: 
+
+1. Ensure that username is added before user can click play
+2. Style the application
+3. Make it responsive - so that it displays properly across multiple devices
+4. enable websockets to control the app from a remote device such as a mobile or tablet device
+5. Use the database to create a leaderboard tab
+6. Implement a "test" mode to allow users to trial the app before their attempt
+7. Name input must accept two names to avoid overwriting of scores
