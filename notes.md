@@ -137,7 +137,6 @@ Remember to handle the user's interaction with your application before playing a
 
 
 ### next steps: 
-
 1. Ensure that username is added before user can click play
 2. Style the application
 3. Make it responsive - so that it displays properly across multiple devices

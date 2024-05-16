@@ -49,8 +49,23 @@ function App() {
 
     const countdownIntervalRef = useRef(null);
     const countdownTimeoutRef = useRef(null);
+
+    function isValidUserName(userName) {
+      const words = userName.trim().split(' ');
+      return words.length >= 2;
+    }
   
     function handlePlay() {
+
+      if (!userName) {
+        window.alert('Please enter your name to play the game!');
+        return;
+      } 
+      if (!isValidUserName(userName)) {
+        window.alert('Please enter your full name to play the game!');
+        return;
+      }
+
       setIsFirstRender(false);
       setIsActive(!isActive);
       if (isActive) {
