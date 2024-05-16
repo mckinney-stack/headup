@@ -10,7 +10,7 @@ import Language from './Language';
 import { StyledH1, StyledH6, StyledFaHockeyPuck, StyledFaHockeyPuckIn, StyledFaHockeyPuckOut } from './StyledComponents';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, get } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -123,6 +123,18 @@ function handleStop(userName, userTime, isCountdownOver) {
   .catch((error) => {
     console.error("Error writing data: ", error);
   });
+
+  // Display data from firebase in console - use this functionality for "leaderboard" tab
+  get(ref(database, 'users/')).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+
 }
   
   useEffect(() => {
