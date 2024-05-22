@@ -33,7 +33,8 @@ export const StyledH1 = styled.h1`
     }
 
     @media (max-width: 480px) {
-        font-size: 80px;
+        font-size: 31.9vw;
+        line-height: 38.4vw;
     }
 `;
 
@@ -77,13 +78,13 @@ export const StyledFaHockeyPuck = styled(FaHockeyPuck)`
     margin-left: 40px;
 
     @media (max-width: 768px) {
-        height: 30px;
-        margin-left: 20px;
+        height: 40px;
+        margin-left: 40px;
     }
 
     @media (max-width: 480px) {
-        height: 20px;
-        margin-left: 10px;
+        height: 40px;
+        margin-left: 40px;
     }
 `;
 
@@ -101,8 +102,8 @@ export const StyledFaHockeyPuckIn = styled(FaHockeyPuck)`
     }
 
     @media (max-width: 480px) {
-        height: 20px;
-        margin-left: 10px;
+        height: 24px;
+        margin-left: 12px;
     }
 `;
 

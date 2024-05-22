@@ -11,6 +11,7 @@ import { StyledH1, StyledH6, StyledFaHockeyPuck, StyledFaHockeyPuckIn, StyledFaH
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase, ref, set, get } from "firebase/database";
+import { styled } from 'styled-components';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -26,6 +27,14 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const database = getDatabase(app);
 
+const CenteredContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: space-around;
+  height: 50vh; /* This makes the container take up the full height of the viewport */
+  text-align: center; /* This centers the text horizontally */
+`;
 
 function App() {
 
@@ -137,23 +146,26 @@ function handleStop(userName, userTime, isCountdownOver) {
 
 }
   
-  useEffect(() => {
-    let interval = null;
-    if (isActive && isCountdownOver) {
-        interval = setInterval(() => {
-            setMilliseconds(milliseconds => milliseconds + 1);
-            if (milliseconds % 1000 === 0) {
-                setSeconds(seconds => seconds + 1);
-            }
-        }, 1);
-        setIsGameOver(false);
-    } else if (!isActive && seconds !== 0) {
-        clearInterval(interval);
-        updateNumber(0);
-        setIsGameOver(true);
-    }
-    return () => clearInterval(interval);
-}, [isActive, isCountdownOver, seconds, milliseconds, number, isGameOver]);
+useEffect(() => {
+  let interval = null;
+  let startTime = null;
+  if (isActive && isCountdownOver) {
+      startTime = Date.now();
+      interval = setInterval(() => {
+          const elapsedTime = Date.now() - startTime;
+          const elapsedSeconds = Math.floor(elapsedTime / 1000);
+          const elapsedMilliseconds = elapsedTime % 1000;
+          setSeconds(elapsedSeconds);
+          setMilliseconds(elapsedMilliseconds);
+          setIsGameOver(false);
+      }, 1);
+  } else if (!isActive && seconds !== 0) {
+      clearInterval(interval);
+      updateNumber(0);
+      setIsGameOver(true);
+  }
+  return () => clearInterval(interval);
+}, [isActive, isCountdownOver]);
 
     function reset() {
       if (countdownIntervalRef.current) {
@@ -176,6 +188,7 @@ function handleStop(userName, userTime, isCountdownOver) {
   
     return (
       <>
+      <CenteredContainer>
         {isStarting ? (
           <>
             <StyledH6>
@@ -199,6 +212,7 @@ function handleStop(userName, userTime, isCountdownOver) {
             <FormattedMessage id="gameOver" /><StyledFaHockeyPuckOut />
           </StyledH1>
         )}
+       </CenteredContainer>
         <Timer userTime={userTime} isActive={isActive} isFirstRender={isFirstRender} handlePlay={handlePlay} handleStop={handleStop} handleReset={reset} userName={userName} isCountdownOver={isCountdownOver} />
         <Language />
         <UserName userName={userName} setUserName={setUserName} />
