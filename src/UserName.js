@@ -22,6 +22,9 @@ const UserInput = styled.input`
   color: black;
   position: relative;
   border-radius: 4px;
+  border: 1px solid ; 
+  border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  padding: 3px 8px; 
 `;
 
 const UserInputShadow = styled.input`
@@ -32,6 +35,9 @@ const UserInputShadow = styled.input`
   position: absolute;
   pointer-events: none;
   border-radius: 4px;
+  border: 1px solid lightgrey; 
+  padding: 3px 8px; 
+  border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
 `;
 
 function handleSubmit(e) {

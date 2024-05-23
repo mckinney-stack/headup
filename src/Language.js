@@ -1,15 +1,24 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { LanguageContext } from './LanguageContext';
+import { FlagIcon } from 'react-flag-kit';
 
 const LanguageContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-bottom: 16px;
 `;
 
-const LanguageHeading = styled.h5`
-  margin-right: 8px;
+export const StyledSelect = styled.select`
+  width: 128px;
+`;
+
+const RectangularFlagIcon = styled(FlagIcon)`
+  width: 24px !important;
+  height: 16px !important;
+  margin-right: 12px;
 `;
 
 function Language() {
@@ -17,11 +26,11 @@ function Language() {
 
   return (
     <LanguageContainer>
-      <LanguageHeading>Language / Jazyk:</LanguageHeading>
-      <select value={locale} onChange={selectLanguage}>
+      <RectangularFlagIcon code={locale === 'en' ? 'GB' : 'SK'} />
+      <StyledSelect className="form-select form-control form-select-sm" value={locale} onChange={selectLanguage}>
         <option value="en">English</option>
         <option value="sk">Slovenský</option>
-      </select>
+      </StyledSelect>
     </LanguageContainer>
   );
 }

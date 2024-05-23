@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { StyledH1 } from './StyledComponents.js';
+import { StyledH1Number } from './StyledComponents.js';
 
 function Counter({number, updateNumber, isActive}){
 
@@ -23,7 +23,7 @@ function Counter({number, updateNumber, isActive}){
 
     
     return (
-        <StyledH1>{number}</StyledH1>
+        <StyledH1Number>{number}</StyledH1Number>
     )
 
 };

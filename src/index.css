@@ -11,12 +11,20 @@ body {
     justify-content: center;
 }
 
-/* .language {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-div.language h5 {
-    margin-right: 8px;
-} */
+/* Change the background color of the toast to red and text color to white */
+.Toastify__toast {
+    background-color: white !important;
+    color: red !important;
+    font-weight: 500;
+  }
+  
+  /* Change the color of the close button to white */
+  .Toastify__close-button {
+    color: red !important;
+  }
+  
+  /* Hide the progress bar */
+  /* .Toastify__progress-bar, .Toastify__progress-bar--wrp {
+    color: red;
+    background-color: red;
+  } */

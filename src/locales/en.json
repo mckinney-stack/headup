@@ -11,5 +11,7 @@
     "figureEight": "Figure of Eight",
     "freestyle": "Freestyle",
     "leftLeg": "Left Leg",
-    "rightLeg": "Right Leg"
+    "rightLeg": "Right Leg",
+    "enterName": "Please enter your name to play!",
+    "enterFullName": "Please enter your full name to play!"
 }

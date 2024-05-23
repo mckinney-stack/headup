@@ -137,12 +137,13 @@ Remember to handle the user's interaction with your application before playing a
 
 
 ### next steps: 
-7. Fix issue with Timer - currently counting much slower than expected
-1. Ensure that username is added before user can click play (1/2 complete - replace window.alerts with nice red modal pop ups)
-2. Style the application
-3. Make it responsive - so that it displays properly across multiple devices
+1. Style the application
+2. Fix puck animation - currently coming in at the wrong location
+3. Style name input field using Bootstrap
+4. Make it responsive - so that it displays properly across multiple devices
 5. Use the database to create a leaderboard tab
-6. Implement a "test" mode to allow users to trial the app before their attempt
+6. Implement a "test" mode to allow users to trial the app before their attempt - maybe could do this with a checkbox instead of a new button for simplicity 
+7. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
 
 ### nice to haves:
 1. enable websockets to control the app from a remote device such as a mobile or tablet device

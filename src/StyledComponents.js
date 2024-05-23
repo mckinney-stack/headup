@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 import { FaHockeyPuck } from "react-icons/fa6";
-import { LiaHockeyPuckSolid } from "react-icons/lia";
 
 
 const slideIn = keyframes`
@@ -35,6 +34,13 @@ export const StyledH1 = styled.h1`
     @media (max-width: 480px) {
         font-size: 31.9vw;
         line-height: 38.4vw;
+    }
+`;
+
+export const StyledH1Number = styled(StyledH1)`
+    @media (max-width: 480px) {
+        font-size: 63.8vw;
+        line-height: 76.8vw;
     }
 `;
 
@@ -74,7 +80,7 @@ export const StyledFaHockeyPuck = styled(FaHockeyPuck)`
     position: relative;
     height: 40px;
     width: fit-content;
-    top: 8px;
+    top: 44px;
     margin-left: 40px;
 
     @media (max-width: 768px) {
@@ -92,7 +98,7 @@ export const StyledFaHockeyPuckIn = styled(FaHockeyPuck)`
     position: relative;
     height: 40px;
     width: fit-content;
-    top: 8px;
+    top: 44px;
     margin-left: 40px;
     animation: ${slideIn} 1.2s ease-out forwards;
 
@@ -127,3 +133,57 @@ export const StyledFaHockeyPuckOut = styled(FaHockeyPuck)`
         margin-left: 10px;
     }
 `;
+
+export const StyledTimer = styled.div`
+  text-align: center;
+  margin: 24px auto 48px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+`;
+
+export const TimeDisplay = styled.div`
+  display: inline-block;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+`;
+
+
+export const StyledButton = styled.button.attrs(props => ({
+    id: props.id,
+  }))`
+    /* Default styles */
+    padding: 8px 48px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+
+  
+    /* Styles based on id */
+    background-color: ${props => {
+      switch (props.id) {
+        case 'play':
+          return 'green';
+        case 'stop':
+          return 'red';
+        case 'reset':
+          return 'blue';
+        default:
+          return 'gray';
+      }
+    }};
+
+    & > svg {
+        margin-left: 8px;
+    }
+  `;
+
+

@@ -7,11 +7,15 @@ import { useContext } from 'react';
 import { LanguageContext } from './LanguageContext';
 import { FormattedMessage } from 'react-intl';
 import Language from './Language';
-import { StyledH1, StyledH6, StyledFaHockeyPuck, StyledFaHockeyPuckIn, StyledFaHockeyPuckOut } from './StyledComponents';
+import { StyledH1, StyledH1Number, StyledH6, StyledFaHockeyPuck, StyledFaHockeyPuckIn } from './StyledComponents';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase, ref, set, get } from "firebase/database";
 import { styled } from 'styled-components';
+import { useIntl } from 'react-intl';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -32,11 +36,14 @@ const CenteredContainer = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: space-around;
-  height: 50vh; /* This makes the container take up the full height of the viewport */
-  text-align: center; /* This centers the text horizontally */
+  height: 50vh; 
+  text-align: center; 
+  margin-bottom: 96px;
 `;
 
 function App() {
+
+    const intl = useIntl();
 
     const types = ['wide', 'narrow', 'figureEight', 'freestyle', 'leftLeg', 'rightLeg'];
 
@@ -54,6 +61,7 @@ function App() {
     const [isFirstRender, setIsFirstRender] = useState(true);
     const [userName, setUserName] = useState('');
 
+
     const userTime = formatTime(seconds, milliseconds);
 
     const countdownIntervalRef = useRef(null);
@@ -63,15 +71,32 @@ function App() {
       const words = userName.trim().split(' ');
       return words.length >= 2;
     }
+
+    const toastOne = () => toast(intl.formatMessage({ id: 'enterName' }), {
+      position: "bottom-right", 
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: false,
+      progressStyle: { background: 'red' },
+    });
+    const toastTwo = () => toast(intl.formatMessage({ id: 'enterFullName' }), {
+      position: "bottom-right", 
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: false,
+      progressStyle: { background: 'red' },
+    });
   
     function handlePlay() {
 
       if (!userName) {
-        window.alert('Please enter your name to play the game!');
+        toastOne();
         return;
       } 
       if (!isValidUserName(userName)) {
-        window.alert('Please enter your full name to play the game!');
+        toastTwo();
         return;
       }
 
@@ -119,8 +144,6 @@ function handleStop(userName, userTime, isCountdownOver) {
     return;
   }
   
-  console.log('hello');
-
   // Write data to firebase
   set(ref(database, 'users/' + userName), {
     username: userName,
@@ -145,6 +168,7 @@ function handleStop(userName, userTime, isCountdownOver) {
   });
 
 }
+
   
 useEffect(() => {
   let interval = null;
@@ -188,13 +212,14 @@ useEffect(() => {
   
     return (
       <>
+      <ToastContainer />
       <CenteredContainer>
         {isStarting ? (
           <>
             <StyledH6>
               <FormattedMessage id="getReady" />
             </StyledH6>
-            <StyledH1>{countdown}</StyledH1>
+            <StyledH1Number>{countdown}</StyledH1Number>
           </>
         ) : isActive ? (
           <>
@@ -209,7 +234,7 @@ useEffect(() => {
           </>
         ) : (
           <StyledH1>
-            <FormattedMessage id="gameOver" /><StyledFaHockeyPuckOut />
+            <FormattedMessage id="gameOver" />
           </StyledH1>
         )}
        </CenteredContainer>
