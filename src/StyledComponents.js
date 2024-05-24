@@ -181,6 +181,15 @@ export const StyledButton = styled.button.attrs(props => ({
       }
     }};
 
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      transform: scale(0.95);
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
     & > svg {
         margin-left: 8px;
     }

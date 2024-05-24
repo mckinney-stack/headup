@@ -145,6 +145,7 @@ Remember to handle the user's interaction with your application before playing a
 6. Implement a "test" mode to allow users to trial the app before their attempt - maybe could do this with a checkbox instead of a new button for simplicity 
 7. Add hover FX and click FX to buttons
 8. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
+9. Create animation when user presses play: Puck should wobble a little bit and then "HEAD UP" heading should exit the screen by moving up and out of sight, before countdown starts and the handlePlay function is triggered
 
 ### nice to haves:
 1. enable websockets to control the app from a remote device such as a mobile or tablet device
