@@ -7,11 +7,11 @@ export default function Timer({ userTime, isActive, isFirstRender, handlePlay, h
   return (
     <StyledTimer>
       {isFirstRender ? (
-        <StyledButton id="play" onClick={handlePlay}><FormattedMessage id="play" /><FaPlay /></StyledButton>
+        <StyledButton id="play" onClick={handlePlay}><FormattedMessage id="play" className="formatted-message" /><FaPlay /></StyledButton>
       ) : isActive ? (
-        <StyledButton id="stop" onClick={() => handleStop(userName, userTime, isCountdownOver)}><FormattedMessage id="stop" /><FaStop /></StyledButton>
+        <StyledButton id="stop" onClick={() => handleStop(userName, userTime, isCountdownOver)}><FormattedMessage id="stop" className="formatted-message" /><FaStop /></StyledButton>
       ) : (
-        <StyledButton id="reset" onClick={handleReset}><FormattedMessage id="reset" /><GrPowerReset /></StyledButton>
+        <StyledButton id="reset" onClick={handleReset}><FormattedMessage id="reset" className="formatted-message" /><GrPowerReset /></StyledButton>
       )}
       <TimeDisplay>{userTime}</TimeDisplay>
     </StyledTimer>

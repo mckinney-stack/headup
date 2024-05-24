@@ -143,7 +143,8 @@ Remember to handle the user's interaction with your application before playing a
 4. Make it responsive - so that it displays properly across multiple devices
 5. Use the database to create a leaderboard tab
 6. Implement a "test" mode to allow users to trial the app before their attempt - maybe could do this with a checkbox instead of a new button for simplicity 
-7. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
+7. Add hover FX and click FX to buttons
+8. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
 
 ### nice to haves:
 1. enable websockets to control the app from a remote device such as a mobile or tablet device
