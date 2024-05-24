@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { FaHockeyPuck } from "react-icons/fa6";
 
 
@@ -84,14 +84,28 @@ export const StyledFaHockeyPuck = styled(FaHockeyPuck)`
     margin-left: 40px;
 
     @media (max-width: 768px) {
-        height: 40px;
-        margin-left: 40px;
+        height: 30px;
+        margin-left: 20px;
     }
 
     @media (max-width: 480px) {
-        height: 40px;
-        margin-left: 40px;
+        height: 24px;
+        margin-left: 12px;
     }
+`;
+
+const wobble = css`
+  @keyframes wobble {
+    0% { transform: rotate(0deg); }
+    15% { transform: rotate(8deg); }
+    30% { transform: rotate(0deg); }
+    45% { transform: rotate(8deg); }
+    60% { transform: rotate(0deg); }
+    75% { transform: rotate(8deg); }
+    90% { transform: rotate(0deg); }
+    100% { transform: rotate(0deg); }
+  }
+  animation: wobble 1s infinite;
 `;
 
 export const StyledFaHockeyPuckIn = styled(FaHockeyPuck)`
@@ -111,7 +125,14 @@ export const StyledFaHockeyPuckIn = styled(FaHockeyPuck)`
         height: 24px;
         margin-left: 12px;
     }
+
+    &.wobble {
+        ${wobble}
+    }
+  
 `;
+
+
 
 export const StyledFaHockeyPuckOut = styled(FaHockeyPuck)`
     position: relative;

@@ -60,6 +60,9 @@ function App() {
     const [isCountdownOver, setIsCountdownOver] = useState(false);
     const [isFirstRender, setIsFirstRender] = useState(true);
     const [userName, setUserName] = useState('');
+    const [isPlayHovered, setIsPlayHovered] = useState(false);
+    const [animationCompleted, setAnimationCompleted] = useState(false);
+
 
 
     const userTime = formatTime(seconds, milliseconds);
@@ -169,6 +172,9 @@ function handleStop(userName, userTime, isCountdownOver) {
 
 }
 
+useEffect(() => {
+  setAnimationCompleted(false);
+}, [isFirstRender]);
   
 useEffect(() => {
   let interval = null;
@@ -229,7 +235,12 @@ useEffect(() => {
         ) : isFirstRender ? (
           <>
           <StyledH1>
-            <FormattedMessage id="headUp" /><StyledFaHockeyPuckIn />
+            <FormattedMessage id="headUp" />
+            {animationCompleted ? (
+        <StyledFaHockeyPuck className={isPlayHovered ? 'wobble' : ''} />
+      ) : (
+        <StyledFaHockeyPuckIn onAnimationEnd={() => setAnimationCompleted(true)} />
+      )}
           </StyledH1>
           </>
         ) : (
@@ -238,8 +249,19 @@ useEffect(() => {
           </StyledH1>
         )}
        </CenteredContainer>
-        <Timer userTime={userTime} isActive={isActive} isFirstRender={isFirstRender} handlePlay={handlePlay} handleStop={handleStop} handleReset={reset} userName={userName} isCountdownOver={isCountdownOver} />
-        <Language />
+       <Timer 
+  userTime={userTime} 
+  isActive={isActive} 
+  isFirstRender={isFirstRender} 
+  handlePlay={handlePlay} 
+  handleStop={handleStop} 
+  handleReset={reset} 
+  userName={userName} 
+  isCountdownOver={isCountdownOver} 
+  onMouseEnter={() => setIsPlayHovered(true)} 
+  onMouseLeave={() => setIsPlayHovered(false)}
+/>        
+<Language />
         <UserName userName={userName} setUserName={setUserName} />
       </>
     );
