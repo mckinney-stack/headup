@@ -23,7 +23,7 @@ function Counter({number, updateNumber, isActive, animationStage}){
 
     
     return (
-        <StyledH1Number className="counter" $shouldExit={animationStage === '4'}>{number}</StyledH1Number>
+        <StyledH1Number key={number} className="counter" $shouldExit={animationStage === '4'}>{number}</StyledH1Number>
     )
 
 };

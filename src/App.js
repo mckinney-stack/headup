@@ -153,10 +153,14 @@ function handleStop(userName, userTime, isCountdownOver) {
     return;
   }
 
+  setIsActive(false);
+
+  /*
   setTimeout(() => { 
     setIsActive(false);
   }, 800);
 
+  */
   
   // Write data to firebase
 //   set(ref(database, 'users/' + userName), {

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { StyledH3 } from './StyledComponents.js';
 
-function StickhandleType({isActive, type, types, setType, animationStage}) {
+function StickhandleType({isActive, type, types, setType}) {
 
     useEffect(() => {
         let timeoutId;
@@ -18,7 +18,6 @@ function StickhandleType({isActive, type, types, setType, animationStage}) {
         return () => clearTimeout(timeoutId);
     }, [isActive, type, setType]);
 
-    return <StyledH3 $shouldExit={animationStage === '4'}><FormattedMessage id={type} /></StyledH3>;
-}
+    return <StyledH3 key={type}><FormattedMessage id={type} /></StyledH3>;}
 
 export default StickhandleType;

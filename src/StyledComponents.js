@@ -1,7 +1,14 @@
 import styled, { keyframes, css } from 'styled-components';
 import { FaHockeyPuck } from "react-icons/fa6";
 
-
+const colorChange = keyframes`
+  0% {
+    color: red;
+  }
+  100% {
+    color: inherit;
+  }
+`;
 const slideIn = keyframes`
   0% {
     transform: translateX(1500%);
@@ -71,21 +78,10 @@ export const StyledH1 = styled.h1`
 
 export const StyledH1Number = styled(StyledH1)`
 
-    @keyframes slideOut {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(1500%);
-        }
-    }
+    /* animation: ${colorChange} 0.6s ease-in-out; */
 
     &.countdown {
         animation: ${slideFromLeft} 0.6s ease-out forwards;
-    }
-
-    &.counter {
-        animation: ${props => props.$shouldExit ? 'slideOut 0.7s forwards' : 'none'};
     }
 
     @media (max-width: 480px) {
@@ -101,24 +97,7 @@ export const StyledH3 = styled.h3`
     margin: 0 auto;
     text-align: center;
 
-    @keyframes moveUpAndOut {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-150vh);
-    }
-  }
-
-    @media (max-width: 768px) {
-        font-size: 80px;
-    }
-
-    @media (max-width: 480px) {
-        font-size: 60px;
-    }
-
-    animation: ${props => props.$shouldExit ? 'moveUpAndOut 0.8s forwards' : 'none'}
+    animation: ${colorChange} 0.6s ease-in-out;
 
 `;
 
@@ -324,13 +303,10 @@ export const StyledButton = styled.button.attrs(props => ({
 
     @keyframes fadeIn {
         0% {
-            transform: scale(0.95);
-            opacity: 0.5;
-            box-shadow: 0px 0px rgba(0, 0, 0, 0.2);
+            opacity: 0;
         }
         100% {
             opacity: 1;
-            transform: scale(1.0);
         }
     }
 
@@ -342,7 +318,7 @@ export const StyledButton = styled.button.attrs(props => ({
             pointer-events: none;
         }
         100% {
-            opacity: 0.3;
+            opacity: 0;
             box-shadow: 0px 0px rgba(0, 0, 0, 0.2);
             pointer-events: none;
         }
