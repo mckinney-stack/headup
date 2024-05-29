@@ -1,7 +1,7 @@
 {
-    "getReady": "Get ready",
-    "headUp": "HEAD UP",
-    "gameOver": "GAME OVER",
+    "getReady": "Get ready...",
+    "headUp": "Head Up",
+    "gameOver": "Game Over",
     "player": "Name:",
     "play": "Play",
     "stop": "Stop",

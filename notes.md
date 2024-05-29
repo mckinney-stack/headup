@@ -137,15 +137,16 @@ Remember to handle the user's interaction with your application before playing a
 
 
 ### next steps: 
-1. Style the application
-2. Fix puck animation - currently coming in at the wrong location
-3. Style name input field using Bootstrap
-4. Make it responsive - so that it displays properly across multiple devices
-5. Use the database to create a leaderboard tab
-6. Implement a "test" mode to allow users to trial the app before their attempt - maybe could do this with a checkbox instead of a new button for simplicity 
-7. Add hover FX and click FX to buttons
-8. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
-9. Create animation when user presses play: Puck should wobble a little bit and then "HEAD UP" heading should exit the screen by moving up and out of sight, before countdown starts and the handlePlay function is triggered
+1. Fix puck animation - currently coming in at the wrong location on mobile
+2. Style name input field using Bootstrap
+3. Make it responsive - so that it displays properly across multiple devices
+4. Use the database to create a "leaderboard" tab
+5. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
+7.  Puck wobble animation on play button hover doesn't work very well on mobile - fix this
 
 ### nice to haves:
 1. enable websockets to control the app from a remote device such as a mobile or tablet device
+2. include video / animation for each stickhandle type on screen
+3. Train an AI to watch the person training through the camera, and identify when the person has fumbled the puck, then stop the clock
+4. Create animation when user presses play: Puck should wobble a little bit and then "HEAD UP" heading should exit the screen by moving up and out of sight, before countdown starts and the handlePlay function is triggered
+5. Create a 'pulse' animation, when game is active, each time a new number and stickhandleType is rendered, change the colour and the fade it back to the black colour

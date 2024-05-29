@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { LanguageContext } from './LanguageContext';
 import { FormattedMessage } from 'react-intl';
 import Language from './Language';
-import { StyledH1, StyledH1Number, StyledH6, StyledFaHockeyPuck, StyledFaHockeyPuckIn } from './StyledComponents';
+import { StyledH1, StyledH1Number, StyledH6, StyledFaHockeyPuck, StyledFaHockeyPuckIn, StyledFaHockeyPuckOut, AnimatedText } from './StyledComponents';
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 // import { getDatabase, ref, set, get } from "firebase/database";
@@ -61,8 +61,7 @@ function App() {
     const [isFirstRender, setIsFirstRender] = useState(true);
     const [userName, setUserName] = useState('');
     const [isPlayHovered, setIsPlayHovered] = useState(false);
-    const [animationCompleted, setAnimationCompleted] = useState(false);
-
+    const [animationStage, setAnimationStage] = useState('1');
 
 
     const userTime = formatTime(seconds, milliseconds);
@@ -103,21 +102,27 @@ function App() {
         return;
       }
 
-      setIsFirstRender(false);
-      setIsActive(!isActive);
-      if (isActive) {
-        setIsStarting(false);
-      } else if (!isActive) {
-        setIsStarting(true);
-      }
-      countdownIntervalRef.current = setInterval(() => {
-        setCountdown((prevCountdown) => prevCountdown - 1);
+      setAnimationStage('3');
+
+      setTimeout(() => {
+        setIsFirstRender(false);
+        setIsActive(!isActive);
+        if (isActive) {
+          setIsStarting(false);
+        } else if (!isActive) {
+          setIsStarting(true);
+        }
+        setTimeout(() => {
+          countdownIntervalRef.current = setInterval(() => {
+            setCountdown((prevCountdown) => prevCountdown - 1);
+          }, 1000);
+          countdownTimeoutRef.current = setTimeout(() => {
+            setIsStarting(false);
+            setIsCountdownOver(true);
+            clearInterval(countdownIntervalRef.current);
+          }, 3000);
+        }, 400);
       }, 1000);
-      countdownTimeoutRef.current = setTimeout(() => {
-        setIsStarting(false);
-        setIsCountdownOver(true);
-        clearInterval(countdownIntervalRef.current);
-      }, 3000);
     }
 
   function formatTime(seconds, milliseconds) {
@@ -133,7 +138,8 @@ function App() {
 }
  
 function handleStop(userName, userTime, isCountdownOver) {
-  setIsActive(false);
+  
+  setAnimationStage('4');
 
   if (countdownIntervalRef.current) {
     clearInterval(countdownIntervalRef.current);
@@ -146,6 +152,11 @@ function handleStop(userName, userTime, isCountdownOver) {
     reset();
     return;
   }
+
+  setTimeout(() => { 
+    setIsActive(false);
+  }, 800);
+
   
   // Write data to firebase
 //   set(ref(database, 'users/' + userName), {
@@ -171,10 +182,6 @@ function handleStop(userName, userTime, isCountdownOver) {
 //   });
 
 }
-
-useEffect(() => {
-  setAnimationCompleted(false);
-}, [isFirstRender]);
   
 useEffect(() => {
   let interval = null;
@@ -198,6 +205,9 @@ useEffect(() => {
 }, [isActive, isCountdownOver]);
 
     function reset() {
+
+      setAnimationStage('5');
+
       if (countdownIntervalRef.current) {
         clearInterval(countdownIntervalRef.current);
       }
@@ -213,7 +223,8 @@ useEffect(() => {
       setCountdown(3);
       setIsCountdownOver(false);
       setIsFirstRender(true);
-      setUserName('');
+      // setUserName(''); - commented out to make testing easier
+      setAnimationStage('1');
     }
   
     return (
@@ -222,34 +233,35 @@ useEffect(() => {
       <CenteredContainer>
         {isStarting ? (
           <>
-            <StyledH6>
+            <StyledH6 className="animate">
               <FormattedMessage id="getReady" />
             </StyledH6>
-            <StyledH1Number>{countdown}</StyledH1Number>
+            <StyledH1Number className="countdown">{countdown}</StyledH1Number>
           </>
         ) : isActive ? (
           <>
-            <StickhandleType types={types} type={type} setType={setType} isActive={isActive} />
-            <Counter number={number} updateNumber={updateNumber} isActive={isActive} />
+            <StickhandleType types={types} type={type} setType={setType} isActive={isActive} animationStage={animationStage} />
+            <Counter number={number} updateNumber={updateNumber} isActive={isActive} animationStage={animationStage} />
           </>
         ) : isFirstRender ? (
           <>
           <StyledH1>
-            <FormattedMessage id="headUp" />
-            {animationCompleted ? (
-        <StyledFaHockeyPuck className={isPlayHovered ? 'wobble' : ''} />
-      ) : (
-        <StyledFaHockeyPuckIn onAnimationEnd={() => setAnimationCompleted(true)} />
-      )}
-          </StyledH1>
+                <AnimatedText $shouldMove={animationStage === '3'}>
+                  <FormattedMessage id="headUp" />
+                </AnimatedText>
+                {animationStage === '1' && <StyledFaHockeyPuckIn onAnimationEnd={() => setAnimationStage('2')} />}
+                {animationStage === '2' && <StyledFaHockeyPuck className={isPlayHovered ? 'wobble' : ''} onAnimationEnd={() => setAnimationStage('3')} />}
+                {animationStage === '3' && <StyledFaHockeyPuckOut />}
+            </StyledH1>
           </>
         ) : (
-          <StyledH1>
+          <StyledH1 className="gameOver" $shouldMove={animationStage === '5'}>
             <FormattedMessage id="gameOver" />
           </StyledH1>
         )}
        </CenteredContainer>
        <Timer 
+  $shouldMove={animationStage === '3'}
   userTime={userTime} 
   isActive={isActive} 
   isFirstRender={isFirstRender} 

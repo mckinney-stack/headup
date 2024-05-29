@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyledH1Number } from './StyledComponents.js';
 
-function Counter({number, updateNumber, isActive}){
+function Counter({number, updateNumber, isActive, animationStage}){
 
     useEffect(() => {
         let intervalId;
@@ -23,7 +23,7 @@ function Counter({number, updateNumber, isActive}){
 
     
     return (
-        <StyledH1Number>{number}</StyledH1Number>
+        <StyledH1Number className="counter" $shouldExit={animationStage === '4'}>{number}</StyledH1Number>
     )
 
 };

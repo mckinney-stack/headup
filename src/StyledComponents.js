@@ -10,6 +10,14 @@ const slideIn = keyframes`
     transform: translateX(0);
   }
 `;
+const slideFromLeft = keyframes`
+  0% {
+    transform: translateX(-1500%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+`;
 const slideOut = keyframes`
     0% {
         transform: translateX(0);
@@ -18,10 +26,29 @@ const slideOut = keyframes`
         transform: translateX(1500%);
     }
 `;
+const slideFromTop = keyframes`
+    0% {
+        transform: translateY(-1500%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+`;
 
 
 export const StyledH1 = styled.h1`
-    display: block;
+
+
+@keyframes slideFromTop {
+    0% {
+        transform: translateY(-1500%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+};
+
+    display: flex;
     font-size: 200px;
     font-weight: 600;
     margin: 0 auto;
@@ -35,9 +62,32 @@ export const StyledH1 = styled.h1`
         font-size: 31.9vw;
         line-height: 38.4vw;
     }
+
+    &.gameOver {
+        animation: ${slideFromTop} 0.3s ease-out forwards;
+    }
+
 `;
 
 export const StyledH1Number = styled(StyledH1)`
+
+    @keyframes slideOut {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(1500%);
+        }
+    }
+
+    &.countdown {
+        animation: ${slideFromLeft} 0.6s ease-out forwards;
+    }
+
+    &.counter {
+        animation: ${props => props.$shouldExit ? 'slideOut 0.7s forwards' : 'none'};
+    }
+
     @media (max-width: 480px) {
         font-size: 63.8vw;
         line-height: 76.8vw;
@@ -51,6 +101,15 @@ export const StyledH3 = styled.h3`
     margin: 0 auto;
     text-align: center;
 
+    @keyframes moveUpAndOut {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-150vh);
+    }
+  }
+
     @media (max-width: 768px) {
         font-size: 80px;
     }
@@ -58,6 +117,9 @@ export const StyledH3 = styled.h3`
     @media (max-width: 480px) {
         font-size: 60px;
     }
+
+    animation: ${props => props.$shouldExit ? 'moveUpAndOut 0.8s forwards' : 'none'}
+
 `;
 
 export const StyledH6 = styled.h6`
@@ -66,6 +128,10 @@ export const StyledH6 = styled.h6`
     font-weight: 600;
     margin: 0 auto;
     text-align: center;
+
+    &.animate {
+        animation: ${slideFromTop} 0.6s ease-out forwards;
+    }
 
     @media (max-width: 768px) {
         font-size: 40px;
@@ -80,7 +146,7 @@ export const StyledFaHockeyPuck = styled(FaHockeyPuck)`
     position: relative;
     height: 40px;
     width: fit-content;
-    top: 44px;
+    top: 156px;
     margin-left: 40px;
 
     @media (max-width: 768px) {
@@ -112,9 +178,9 @@ export const StyledFaHockeyPuckIn = styled(FaHockeyPuck)`
     position: relative;
     height: 40px;
     width: fit-content;
-    top: 44px;
+    top: 156px;
     margin-left: 40px;
-    animation: ${slideIn} 1.2s ease-out forwards;
+    animation: ${slideIn} 0.8s ease-out forwards;
 
     @media (max-width: 768px) {
         height: 30px;
@@ -132,17 +198,58 @@ export const StyledFaHockeyPuckIn = styled(FaHockeyPuck)`
   
 `;
 
+export const SlideDownAnimation = styled.div`
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+
+  &.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+export const SlideLeftAnimation = styled.div`
+  transform: translateX(-150%);
+  opacity: 0;
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+
+  &.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+export const AnimatedText = styled.div`
+  @keyframes moveUpAndOut {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-150vh);
+    }
+  }
+  @keyframes slideFromTop {
+    0% {
+        transform: translateY(-1500%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+  }
+
+  animation: ${props => props.$shouldMove ? 'moveUpAndOut 0.8s forwards' : 'slideFromTop 0.8s forwards'};
+`;
 
 
 export const StyledFaHockeyPuckOut = styled(FaHockeyPuck)`
     position: relative;
     height: 40px;
     width: fit-content;
-    top: 8px;
+    top: 156px;
     margin-left: 40px;
-    animation: ${slideOut} 1.6s ease-in-out forwards;
-    animation: display none 1.6s ease-in-out forwards;
-    animation-delay: 1s;
+    animation: ${slideOut} 0.4s ease-in-out forwards;
+    animation: display none 0.4s ease-in-out forwards;
 
     @media (max-width: 768px) {
         height: 30px;
@@ -150,8 +257,8 @@ export const StyledFaHockeyPuckOut = styled(FaHockeyPuck)`
     }
 
     @media (max-width: 480px) {
-        height: 20px;
-        margin-left: 10px;
+        height: 24px;
+        margin-left: 12px;
     }
 `;
 
@@ -185,7 +292,6 @@ export const StyledButton = styled.button.attrs(props => ({
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 
   
     /* Styles based on id */
@@ -203,7 +309,8 @@ export const StyledButton = styled.button.attrs(props => ({
     }};
 
     &:hover {
-      opacity: 0.8;
+      opacity: 0.9;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     &:active {
@@ -213,6 +320,39 @@ export const StyledButton = styled.button.attrs(props => ({
 
     & > svg {
         margin-left: 8px;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            transform: scale(0.95);
+            opacity: 0.5;
+            box-shadow: 0px 0px rgba(0, 0, 0, 0.2);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1.0);
+        }
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        1% {
+            pointer-events: none;
+        }
+        100% {
+            opacity: 0.3;
+            box-shadow: 0px 0px rgba(0, 0, 0, 0.2);
+            pointer-events: none;
+        }
+    }
+
+    &#play {
+        animation: ${props => props.$shouldMove ? 'fadeOut 0.3s forwards' : 'none'};
+    }
+    &#stop {
+        animation: ${props => props.$shouldMove ? 'fadeIn 0.3s forwards' : 'none'};
     }
   `;
 
