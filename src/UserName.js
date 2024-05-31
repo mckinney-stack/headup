@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { getDatabase, ref, get } from "firebase/database";
+// import { getDatabase, ref, get } from "firebase/database";
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
 
-/* Bootstrap Styles */
 const FormGroup = styled.div`
   width: 256px;
   margin: 0 auto;
@@ -62,29 +61,29 @@ export default function UserName({userName, setUserName}) {
   const [userNames, setUserNames] = useState([]);
   const [suggestion, setSuggestion] = useState('');
 
-  useEffect(() => {
-    const db = getDatabase();
-    get(ref(db, 'users')).then((snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        const names = Object.keys(data);
-        setUserNames(names);
-      } else {
-        console.log("No data available");
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
-  }, [userNames]);
+  // useEffect(() => {
+  //   const db = getDatabase();
+  //   get(ref(db, 'users')).then((snapshot) => {
+  //     if (snapshot.exists()) {
+  //       const data = snapshot.val();
+  //       const names = Object.keys(data);
+  //       setUserNames(names);
+  //     } else {
+  //       console.log("No data available");
+  //     }
+  //   }).catch((error) => {
+  //     console.error(error);
+  //   });
+  // }, [userNames]);
 
-  useEffect(() => {
-    if (userName) {
-      const match = userNames.find(name => name.startsWith(userName));
-      setSuggestion(match ? match : '');
-    } else {
-      setSuggestion('');
-    }
-  }, [userName, userNames]);
+  // useEffect(() => {
+  //   if (userName) {
+  //     const match = userNames.find(name => name.startsWith(userName));
+  //     setSuggestion(match ? match : '');
+  //   } else {
+  //     setSuggestion('');
+  //   }
+  // }, [userName, userNames]);
 
 
   return (

@@ -8,15 +8,15 @@ import { LanguageContext } from './LanguageContext';
 import { FormattedMessage } from 'react-intl';
 import Language from './Language';
 import { StyledH1, StyledH1Number, StyledH6, StyledFaHockeyPuck, StyledFaHockeyPuckIn, StyledFaHockeyPuckOut, AnimatedText } from './StyledComponents';
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, set, get } from "firebase/database";
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+// import { getDatabase, ref, set, get } from "firebase/database";
 import { styled } from 'styled-components';
 import { useIntl } from 'react-intl';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
+/*
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -30,6 +30,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const database = getDatabase(app);
+*/
 
 const CenteredContainer = styled.div`
   display: flex;
@@ -156,27 +157,27 @@ function handleStop(userName, userTime, isCountdownOver) {
   setIsActive(false);
   
   // Write data to firebase
-  set(ref(database, 'users/' + userName), {
-    username: userName,
-    time: userTime
-  })
-  .then(() => {
-    console.log("Data written successfully!");
-  })
-  .catch((error) => {
-    console.error("Error writing data: ", error);
-  });
+  // set(ref(database, 'users/' + userName), {
+  //   username: userName,
+  //   time: userTime
+  // })
+  // .then(() => {
+  //   console.log("Data written successfully!");
+  // })
+  // .catch((error) => {
+  //   console.error("Error writing data: ", error);
+  // });
 
   // Display data from firebase in console - use this functionality for "leaderboard" tab
-  get(ref(database, 'users/')).then((snapshot) => {
-    if (snapshot.exists()) {
-      console.log(snapshot.val());
-    } else {
-      console.log("No data available");
-    }
-  }).catch((error) => {
-    console.error(error);
-  });
+  // get(ref(database, 'users/')).then((snapshot) => {
+  //   if (snapshot.exists()) {
+  //     console.log(snapshot.val());
+  //   } else {
+  //     console.log("No data available");
+  //   }
+  // }).catch((error) => {
+  //   console.error(error);
+  // });
 
 }
   
