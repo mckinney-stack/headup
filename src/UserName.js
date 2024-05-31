@@ -1,96 +1,111 @@
 import { useEffect, useState } from 'react';
-// import { getDatabase, ref, get } from "firebase/database";
+import { getDatabase, ref, get } from "firebase/database";
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
-const UserNameContainer = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+/* Bootstrap Styles */
+const FormGroup = styled.div`
+  width: 256px;
+  margin: 0 auto;
 `;
 
-const UserHeading = styled.label`
-  margin-right: 8px;
-  font-weight: 700;
-  font-size: 0.83em;
+const BsLabel = styled.label`
+  font-weight: 600;
+  margin-right: 12px;
 `;
 
-const UserInput = styled.input`
-  margin-left: 8px;
-  margin-right: -8px;
-  background-color: transparent;
-  color: black;
+const InputContainer = styled.div`
   position: relative;
-  border-radius: 4px;
-  border: 1px solid ; 
-  border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-  padding: 3px 8px; 
+  width: 160px;
 `;
 
-const UserInputShadow = styled.input`
-  margin-left: 8px;
-  margin-right: -8px;
-  background-color: transparent;
-  color: lightgrey;
-  position: absolute;
-  pointer-events: none;
-  border-radius: 4px;
-  border: 1px solid lightgrey; 
-  padding: 3px 8px; 
-  border-color: light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+const BsInput = styled.input`
+  width: 160px;
+  position: relative;
+  z-index: 2;
+  
+  &:active, &:focus {
+    background-color: transparent !important;
+  }
+
 `;
+
+const BsUserInputShadow = styled.input`
+  
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent !important;
+  pointer-events: none;
+  color: #adb5bd !important;
+
+  &.disabled {
+    background-color: transparent !important;
+    position: absolute !important;
+    color: #adb5bd !important;
+    z-index: -300;
+  }
+
+`;
+
 
 function handleSubmit(e) {
   e.preventDefault();
 }
+
+
 
 export default function UserName({userName, setUserName}) {
 
   const [userNames, setUserNames] = useState([]);
   const [suggestion, setSuggestion] = useState('');
 
-  // useEffect(() => {
-  //   const db = getDatabase();
-  //   get(ref(db, 'users')).then((snapshot) => {
-  //     if (snapshot.exists()) {
-  //       const data = snapshot.val();
-  //       const names = Object.keys(data);
-  //       setUserNames(names);
-  //     } else {
-  //       console.log("No data available");
-  //     }
-  //   }).catch((error) => {
-  //     console.error(error);
-  //   });
-  // }, [userNames]);
+  useEffect(() => {
+    const db = getDatabase();
+    get(ref(db, 'users')).then((snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        const names = Object.keys(data);
+        setUserNames(names);
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  }, [userNames]);
 
-  // useEffect(() => {
-  //   if (userName) {
-  //     const match = userNames.find(name => name.startsWith(userName));
-  //     setSuggestion(match ? match : '');
-  //   } else {
-  //     setSuggestion('');
-  //   }
-  // }, [userName, userNames]);
+  useEffect(() => {
+    if (userName) {
+      const match = userNames.find(name => name.startsWith(userName));
+      setSuggestion(match ? match : '');
+    } else {
+      setSuggestion('');
+    }
+  }, [userName, userNames]);
 
-  return ( 
-    <UserNameContainer onSubmit={handleSubmit}>
-      <UserHeading>
+
+  return (
+    <FormGroup className="form-group d-flex align-items-center" onSubmit={handleSubmit}>
+      <BsLabel htmlFor="nameInput" className="mr-2">
         <FormattedMessage id="player" />
-        <UserInputShadow type="text" value={suggestion} disabled />
-        <UserInput 
-        type="text" 
-        value={userName} 
-        onChange={e => setUserName(e.target.value)} 
-        onKeyDown={e => {
+      </BsLabel>
+      <InputContainer>
+      <BsInput placeholder="Bobby Orr" type="text" className="form-control form-control-sm" id="nameInput" value={userName} onChange={e => setUserName(e.target.value)} onKeyDown={e => {
           if (e.key === 'Tab') {
             e.preventDefault();
             setUserName(suggestion);
           }
         }}
-        onClick={() => {if (suggestion) {setUserName(suggestion)}}}
+        onTouchMove={() => {if (suggestion) {setUserName(suggestion)}}}
         />
-      </UserHeading>
-    </UserNameContainer>
+        <BsUserInputShadow type="text" className="form-control form-control-sm" value={suggestion} disabled/>
+      </InputContainer>
+    </FormGroup>
   );
 };
+
+
+
