@@ -260,6 +260,7 @@ useEffect(() => {
        </CenteredContainer>
        <Timer 
   $shouldMove={animationStage === '3'}
+  $shouldFade={animationStage === '3' || animationStage === '5'}
   userTime={userTime} 
   isActive={isActive} 
   isFirstRender={isFirstRender} 

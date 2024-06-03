@@ -1,7 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { LanguageContext } from './LanguageContext';
 import { FlagIcon } from 'react-flag-kit';
+
+const slideDown = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+`;
+const slideUp = keyframes`
+  0% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
 
 const LanguageContainer = styled.div`
   display: flex;
@@ -9,9 +26,11 @@ const LanguageContainer = styled.div`
   justify-content: center;
   flex-direction: row;
   margin-bottom: 16px;
+  animation: ${slideUp} 0.8s ease-in-out forwards;
 
-  transition: transform 0.8s ease-in-out;
-  transform: ${props => props.$shouldHide ? 'translateY(100vh)' : 'translateY(0)'};
+  ${props => props.$shouldHide && css`
+    animation: ${slideDown} 0.8s ease-in-out forwards;
+  `}
 `;
 
 export const StyledSelect = styled.select`
@@ -26,6 +45,20 @@ const RectangularFlagIcon = styled(FlagIcon)`
 
 function Language({ $shouldHide }) {
   const { locale, selectLanguage } = useContext(LanguageContext);
+  const [isHidden, setIsHidden] = useState(false);
+
+  useEffect(() => {
+    if ($shouldHide) {
+      const timerId = setTimeout(() => setIsHidden(true), 800); // Match the duration of the animation
+      return () => clearTimeout(timerId); // Clean up on unmount
+    } else {
+      setIsHidden(false);
+    }
+  }, [$shouldHide]);
+
+  if (isHidden) {
+    return null;
+  }
 
   return (
     <LanguageContainer $shouldHide={$shouldHide}>

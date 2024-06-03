@@ -3,9 +3,11 @@ import { StyledButton, StyledTimer, TimeDisplay } from './StyledComponents';
 import { FaPlay, FaStop } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
 
-export default function Timer({ $shouldMove, userTime, isActive, isFirstRender, handlePlay, handleStop, handleReset, userName, isCountdownOver, onMouseEnter, onMouseLeave }) {
+
+
+export default function Timer({ $shouldMove, $shouldFade, userTime, isActive, isFirstRender, handlePlay, handleStop, handleReset, userName, isCountdownOver, onMouseEnter, onMouseLeave }) {
   return (
-    <StyledTimer>
+    <StyledTimer isFirstRender={isFirstRender}>
       {isFirstRender ? (
         <StyledButton $shouldMove={$shouldMove} id="play" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onClick={handlePlay}><FormattedMessage id="play" className="formatted-message" /><FaPlay /></StyledButton>
       ) : isActive ? (
@@ -13,7 +15,7 @@ export default function Timer({ $shouldMove, userTime, isActive, isFirstRender, 
       ) : (
         <StyledButton id="reset" onClick={handleReset}><FormattedMessage id="reset" className="formatted-message" /><GrPowerReset /></StyledButton>
       )}
-      <TimeDisplay $shouldMove={$shouldMove}>{userTime}</TimeDisplay>
+      <TimeDisplay $shouldFade={$shouldFade}>{userTime}</TimeDisplay>
     </StyledTimer>
   );
 }

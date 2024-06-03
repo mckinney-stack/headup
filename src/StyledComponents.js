@@ -249,7 +249,22 @@ export const StyledTimer = styled.div`
   align-items: center;
   justify-content: center;
   width: 48px;
+
+  @keyframes slideUp {
+    0% {
+    transform: translateY(1500%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+${props => props.isFirstRender && css`
+    animation: slideUp 0.8s ease-in-out forwards;
+  `}
+
 `;
+
 
 export const TimeDisplay = styled.div`
   display: inline-block;
@@ -271,7 +286,7 @@ export const TimeDisplay = styled.div`
     }
   }
 
-  animation: ${props => props.$shouldMove ? 'fadeOutIn 1.5s ease-in-out' : 'none'};
+  animation: ${props => props.$shouldFade ? 'fadeOutIn 1.5s ease-in-out' : 'none'};
 `;
 
 
@@ -347,6 +362,7 @@ export const StyledButton = styled.button.attrs(props => ({
     &#stop {
         animation: ${props => props.$shouldMove ? 'fadeIn 0.3s forwards' : 'none'};
     }
+    
   `;
 
 
