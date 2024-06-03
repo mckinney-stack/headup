@@ -142,6 +142,7 @@ Remember to handle the user's interaction with your application before playing a
 3. Use the database to create a "leaderboard" tab
 4. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
 5. Puck wobble animation on play button hover doesn't work very well on mobile - fix this
+6. Once user presses play, form field options should disappear
 
 ### nice to haves:
 1. enable websockets to control the app from a remote device such as a mobile or tablet device

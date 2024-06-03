@@ -253,7 +253,7 @@ useEffect(() => {
             </StyledH1>
           </>
         ) : (
-          <StyledH1 className="gameOver" $shouldMove={animationStage === '5'}>
+          <StyledH1 className="gameOver">
             <FormattedMessage id="gameOver" />
           </StyledH1>
         )}
@@ -271,8 +271,8 @@ useEffect(() => {
   onMouseEnter={() => setIsPlayHovered(true)} 
   onMouseLeave={() => setIsPlayHovered(false)}
 />        
-<Language />
-        <UserName userName={userName} setUserName={setUserName} />
+        <Language $shouldHide={animationStage === '3' || animationStage === '4'} />
+        <UserName userName={userName} setUserName={setUserName} $shouldHide={animationStage === '3' || animationStage === '4'} />
       </>
     );
   }

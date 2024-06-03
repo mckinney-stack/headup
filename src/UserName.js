@@ -7,6 +7,9 @@ import { FormattedMessage } from 'react-intl';
 const FormGroup = styled.div`
   width: 256px;
   margin: 0 auto;
+
+  transition: transform 0.8s ease-in-out;
+  transform: ${props => props.$shouldHide ? 'translateY(100vh)' : 'translateY(0)'};
 `;
 
 const BsLabel = styled.label`
@@ -56,7 +59,7 @@ function handleSubmit(e) {
 
 
 
-export default function UserName({userName, setUserName}) {
+export default function UserName({userName, setUserName, $shouldHide}) {
 
   const [userNames, setUserNames] = useState([]);
   const [suggestion, setSuggestion] = useState('');
@@ -87,7 +90,7 @@ export default function UserName({userName, setUserName}) {
 
 
   return (
-    <FormGroup className="form-group d-flex align-items-center" onSubmit={handleSubmit}>
+    <FormGroup className="form-group d-flex align-items-center" onSubmit={handleSubmit} $shouldHide={$shouldHide}>
       <BsLabel htmlFor="nameInput" className="mr-2">
         <FormattedMessage id="player" />
       </BsLabel>

@@ -255,6 +255,23 @@ export const TimeDisplay = styled.div`
   display: inline-block;
   text-align: center;
   font-family: 'Space Mono', monospace;
+
+  @keyframes fadeOutIn {
+    0% {
+      opacity: 1;
+    }
+    20% {
+      opacity: 0;
+    }
+    55% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  animation: ${props => props.$shouldMove ? 'fadeOutIn 1.5s ease-in-out' : 'none'};
 `;
 
 

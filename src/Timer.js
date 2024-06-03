@@ -13,7 +13,7 @@ export default function Timer({ $shouldMove, userTime, isActive, isFirstRender, 
       ) : (
         <StyledButton id="reset" onClick={handleReset}><FormattedMessage id="reset" className="formatted-message" /><GrPowerReset /></StyledButton>
       )}
-      <TimeDisplay>{userTime}</TimeDisplay>
+      <TimeDisplay $shouldMove={$shouldMove}>{userTime}</TimeDisplay>
     </StyledTimer>
   );
 }
