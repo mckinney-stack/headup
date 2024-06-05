@@ -11,7 +11,7 @@ const colorChange = keyframes`
 `;
 const slideIn = keyframes`
   0% {
-    transform: translateX(1500%);
+    transform: translateX(3000%);
   }
   100% {
     transform: translateX(0);

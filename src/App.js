@@ -206,23 +206,23 @@ useEffect(() => {
 
       setAnimationStage('5');
 
-      if (countdownIntervalRef.current) {
-        clearInterval(countdownIntervalRef.current);
-      }
-      if (countdownTimeoutRef.current) {
-        clearTimeout(countdownTimeoutRef.current);
-      }
-      setSeconds(0);
-      setMilliseconds(0);
-      setIsActive(false);
-      updateNumber(0);
-      setType(types[Math.floor(Math.random() * types.length)]);
-      setIsStarting(false);
-      setCountdown(3);
-      setIsCountdownOver(false);
-      setIsFirstRender(true);
-      // setUserName(''); - commented out to make testing easier
-      setAnimationStage('1');
+        if (countdownIntervalRef.current) {
+          clearInterval(countdownIntervalRef.current);
+        }
+        if (countdownTimeoutRef.current) {
+          clearTimeout(countdownTimeoutRef.current);
+        }
+        setAnimationStage('1');
+        setSeconds(0);
+        setMilliseconds(0);
+        setIsActive(false);
+        updateNumber(0);
+        setType(types[Math.floor(Math.random() * types.length)]);
+        setIsStarting(false);
+        setCountdown(3);
+        setIsCountdownOver(false);
+        setIsFirstRender(true);
+        // setUserName(''); - commented out to make testing easier
     }
   
     return (
