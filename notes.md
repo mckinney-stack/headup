@@ -138,11 +138,12 @@ Remember to handle the user's interaction with your application before playing a
 
 ### next steps: 
 1. Fix puck animation - currently coming in at the wrong location on mobile
-2. Make it responsive - so that it displays properly across multiple devices
-3. Use the database to create a "leaderboard" tab
-4. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
-5. Puck wobble animation on play button hover doesn't work very well on mobile - fix this
-6. Once user presses play, form field options should disappear
+2. Attempt refactor on new branch using spring animations library, to keep things clean
+3. Make it responsive - so that it displays properly across multiple devices
+4. Use the database to create a "leaderboard" tab
+5. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
+6. Puck wobble animation on play button hover doesn't work very well on mobile - fix this
+7. Once user presses play, form field options should disappear
 
 ### nice to haves:
 1. enable websockets to control the app from a remote device such as a mobile or tablet device

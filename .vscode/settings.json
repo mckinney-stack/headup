@@ -9,5 +9,6 @@
         "activityBarBadge.background": "#229b04",
         "activityBarBadge.foreground": "#e7e7e7"
     },
-    "peacock.color": "#fc8099"
+    "peacock.color": "#fc8099",
+    "livePreview.defaultPreviewPath": "/src/amends.html"
 }
