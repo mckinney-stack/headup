@@ -3,34 +3,12 @@ import styled, { keyframes, css } from 'styled-components';
 import { LanguageContext } from './LanguageContext';
 import { FlagIcon } from 'react-flag-kit';
 
-const slideDown = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(100vh);
-  }
-`;
-const slideUp = keyframes`
-  0% {
-    transform: translateY(100vh);
-  }
-  100% {
-    transform: translateY(0);
-  }
-`;
-
 const LanguageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   margin-bottom: 16px;
-  animation: ${slideUp} 0.8s ease-in-out forwards;
-
-  ${props => props.$shouldHide && css`
-    animation: ${slideDown} 0.8s ease-in-out forwards;
-  `}
 `;
 
 export const StyledSelect = styled.select`
@@ -43,25 +21,11 @@ const RectangularFlagIcon = styled(FlagIcon)`
   margin-right: 12px;
 `;
 
-function Language({ $shouldHide }) {
+function Language() {
   const { locale, selectLanguage } = useContext(LanguageContext);
-  const [isHidden, setIsHidden] = useState(false);
-
-  useEffect(() => {
-    if ($shouldHide) {
-      const timerId = setTimeout(() => setIsHidden(true), 800); // Match the duration of the animation
-      return () => clearTimeout(timerId); // Clean up on unmount
-    } else {
-      setIsHidden(false);
-    }
-  }, [$shouldHide]);
-
-  if (isHidden) {
-    return null;
-  }
 
   return (
-    <LanguageContainer $shouldHide={$shouldHide}>
+    <LanguageContainer>
       <RectangularFlagIcon code={locale === 'en' ? 'GB' : 'SK'} />
       <StyledSelect className="form-select form-control form-select-sm" value={locale} onChange={selectLanguage}>
         <option value="en">English</option>

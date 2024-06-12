@@ -1,59 +1,8 @@
 import styled, { keyframes, css } from 'styled-components';
 import { FaHockeyPuck } from "react-icons/fa6";
 
-const colorChange = keyframes`
-  0% {
-    color: red;
-  }
-  100% {
-    color: inherit;
-  }
-`;
-const slideIn = keyframes`
-  0% {
-    transform: translateX(3000%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-`;
-const slideFromLeft = keyframes`
-  0% {
-    transform: translateX(-1500%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-`;
-const slideOut = keyframes`
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(1500%);
-    }
-`;
-const slideFromTop = keyframes`
-    0% {
-        transform: translateY(-1500%);
-    }
-    100% {
-        transform: translateY(0);
-    }
-`;
-
 
 export const StyledH1 = styled.h1`
-
-
-@keyframes slideFromTop {
-    0% {
-        transform: translateY(-1500%);
-    }
-    100% {
-        transform: translateY(0);
-    }
-};
 
     display: flex;
     font-size: 200px;
@@ -70,19 +19,9 @@ export const StyledH1 = styled.h1`
         line-height: 38.4vw;
     }
 
-    &.gameOver {
-        animation: ${slideFromTop} 0.3s ease-out forwards;
-    }
-
 `;
 
 export const StyledH1Number = styled(StyledH1)`
-
-    /* animation: ${colorChange} 0.6s ease-in-out; */
-
-    &.countdown {
-        animation: ${slideFromLeft} 0.6s ease-out forwards;
-    }
 
     @media (max-width: 480px) {
         font-size: 63.8vw;
@@ -96,9 +35,6 @@ export const StyledH3 = styled.h3`
     font-weight: 600;
     margin: 0 auto;
     text-align: center;
-
-    animation: ${colorChange} 0.6s ease-in-out;
-
 `;
 
 export const StyledH6 = styled.h6`
@@ -107,10 +43,6 @@ export const StyledH6 = styled.h6`
     font-weight: 600;
     margin: 0 auto;
     text-align: center;
-
-    &.animate {
-        animation: ${slideFromTop} 0.6s ease-out forwards;
-    }
 
     @media (max-width: 768px) {
         font-size: 40px;
@@ -159,7 +91,6 @@ export const StyledFaHockeyPuckIn = styled(FaHockeyPuck)`
     width: fit-content;
     top: 156px;
     margin-left: 40px;
-    animation: ${slideIn} 0.8s ease-out forwards;
 
     @media (max-width: 768px) {
         height: 30px;
@@ -177,49 +108,6 @@ export const StyledFaHockeyPuckIn = styled(FaHockeyPuck)`
   
 `;
 
-export const SlideDownAnimation = styled.div`
-  transform: translateY(-100%);
-  opacity: 0;
-  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-
-  &.active {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
-
-export const SlideLeftAnimation = styled.div`
-  transform: translateX(-150%);
-  opacity: 0;
-  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-
-  &.active {
-    transform: translateY(0);
-    opacity: 1;
-  }
-`;
-
-export const AnimatedText = styled.div`
-  @keyframes moveUpAndOut {
-    0% {
-      transform: translateY(0);
-    }
-    100% {
-      transform: translateY(-150vh);
-    }
-  }
-  @keyframes slideFromTop {
-    0% {
-        transform: translateY(-1500%);
-    }
-    100% {
-        transform: translateY(0);
-    }
-  }
-
-  animation: ${props => props.$shouldMove ? 'moveUpAndOut 0.8s forwards' : 'slideFromTop 0.8s forwards'};
-`;
-
 
 export const StyledFaHockeyPuckOut = styled(FaHockeyPuck)`
     position: relative;
@@ -227,8 +115,6 @@ export const StyledFaHockeyPuckOut = styled(FaHockeyPuck)`
     width: fit-content;
     top: 156px;
     margin-left: 40px;
-    animation: ${slideOut} 0.4s ease-in-out forwards;
-    animation: display none 0.4s ease-in-out forwards;
 
     @media (max-width: 768px) {
         height: 30px;
@@ -249,20 +135,6 @@ export const StyledTimer = styled.div`
   align-items: center;
   justify-content: center;
   width: 48px;
-
-  @keyframes slideUp {
-    0% {
-    transform: translateY(1500%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-${props => props.isFirstRender && css`
-    animation: slideUp 0.8s ease-in-out forwards;
-  `}
-
 `;
 
 
@@ -270,23 +142,6 @@ export const TimeDisplay = styled.div`
   display: inline-block;
   text-align: center;
   font-family: 'Space Mono', monospace;
-
-  @keyframes fadeOutIn {
-    0% {
-      opacity: 1;
-    }
-    20% {
-      opacity: 0;
-    }
-    55% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  animation: ${props => props.$shouldFade ? 'fadeOutIn 1.5s ease-in-out' : 'none'};
 `;
 
 
@@ -332,37 +187,5 @@ export const StyledButton = styled.button.attrs(props => ({
     & > svg {
         margin-left: 8px;
     }
-
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
-
-    @keyframes fadeOut {
-        0% {
-            opacity: 1;
-        }
-        1% {
-            pointer-events: none;
-        }
-        100% {
-            opacity: 0;
-            box-shadow: 0px 0px rgba(0, 0, 0, 0.2);
-            pointer-events: none;
-        }
-    }
-
-    &#play {
-        animation: ${props => props.$shouldMove ? 'fadeOut 0.3s forwards' : 'none'};
-    }
-    &#stop {
-        animation: ${props => props.$shouldMove ? 'fadeIn 0.3s forwards' : 'none'};
-    }
     
   `;
-
-  /* TEST */

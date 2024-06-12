@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { LanguageContext } from './LanguageContext';
 import { FormattedMessage } from 'react-intl';
 import Language from './Language';
-import { StyledH1, StyledH1Number, StyledH6, StyledFaHockeyPuck, StyledFaHockeyPuckIn, StyledFaHockeyPuckOut, AnimatedText } from './StyledComponents';
+import { StyledH1, StyledH1Number, StyledH6, StyledFaHockeyPuck } from './StyledComponents';
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 // import { getDatabase, ref, set, get } from "firebase/database";
@@ -62,7 +62,6 @@ function App() {
     const [isFirstRender, setIsFirstRender] = useState(true);
     const [userName, setUserName] = useState('');
     const [isPlayHovered, setIsPlayHovered] = useState(false);
-    const [animationStage, setAnimationStage] = useState('1');
 
 
     const userTime = formatTime(seconds, milliseconds);
@@ -103,8 +102,6 @@ function App() {
         return;
       }
 
-      setAnimationStage('3');
-
       setTimeout(() => {
         setIsFirstRender(false);
         setIsActive(!isActive);
@@ -140,8 +137,6 @@ function App() {
  
 function handleStop(userName, userTime, isCountdownOver) {
   
-  setAnimationStage('4');
-
   if (countdownIntervalRef.current) {
     clearInterval(countdownIntervalRef.current);
   }
@@ -204,15 +199,12 @@ useEffect(() => {
 
     function reset() {
 
-      setAnimationStage('5');
-
         if (countdownIntervalRef.current) {
           clearInterval(countdownIntervalRef.current);
         }
         if (countdownTimeoutRef.current) {
           clearTimeout(countdownTimeoutRef.current);
         }
-        setAnimationStage('1');
         setSeconds(0);
         setMilliseconds(0);
         setIsActive(false);
@@ -231,25 +223,21 @@ useEffect(() => {
       <CenteredContainer>
         {isStarting ? (
           <>
-            <StyledH6 className="animate">
+            <StyledH6>
               <FormattedMessage id="getReady" />
             </StyledH6>
-            <StyledH1Number className="countdown">{countdown}</StyledH1Number>
+            <StyledH1Number>{countdown}</StyledH1Number>
           </>
         ) : isActive ? (
           <>
-            <StickhandleType types={types} type={type} setType={setType} isActive={isActive} animationStage={animationStage} />
-            <Counter number={number} updateNumber={updateNumber} isActive={isActive} animationStage={animationStage} />
+            <StickhandleType types={types} type={type} setType={setType} isActive={isActive} />
+            <Counter number={number} updateNumber={updateNumber} isActive={isActive} />
           </>
         ) : isFirstRender ? (
           <>
           <StyledH1>
-                <AnimatedText $shouldMove={animationStage === '3'}>
-                  <FormattedMessage id="headUp" />
-                </AnimatedText>
-                {animationStage === '1' && <StyledFaHockeyPuckIn onAnimationEnd={() => setAnimationStage('2')} />}
-                {animationStage === '2' && <StyledFaHockeyPuck className={isPlayHovered ? 'wobble' : ''} onAnimationEnd={() => setAnimationStage('3')} />}
-                {animationStage === '3' && <StyledFaHockeyPuckOut />}
+                <FormattedMessage id="headUp" />
+                <StyledFaHockeyPuck />
             </StyledH1>
           </>
         ) : (
@@ -258,9 +246,7 @@ useEffect(() => {
           </StyledH1>
         )}
        </CenteredContainer>
-       <Timer 
-  $shouldMove={animationStage === '3'}
-  $shouldFade={animationStage === '3' || animationStage === '5'}
+       <Timer
   userTime={userTime} 
   isActive={isActive} 
   isFirstRender={isFirstRender} 
@@ -272,8 +258,8 @@ useEffect(() => {
   onMouseEnter={() => setIsPlayHovered(true)} 
   onMouseLeave={() => setIsPlayHovered(false)}
 />        
-        <Language $shouldHide={animationStage === '3' || animationStage === '4'} />
-        <UserName userName={userName} setUserName={setUserName} $shouldHide={animationStage === '3' || animationStage === '4'} />
+        <Language />
+        <UserName userName={userName} setUserName={setUserName} />
       </>
     );
   }

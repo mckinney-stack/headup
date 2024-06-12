@@ -22,12 +22,7 @@ body {
   .Toastify__close-button {
     color: red !important;
   }
-  
-  /* Hide the progress bar */
-  /* .Toastify__progress-bar, .Toastify__progress-bar--wrp {
-    color: red;
-    background-color: red;
-  } */
+
 
   @keyframes wobble {
     0% { transform: rotate(0deg); }
@@ -42,22 +37,4 @@ body {
 
   .wobble {
     animation: wobble 1s infinite;
-  }
-
-  .fade-enter {
-    opacity: 0;
-  }
-  
-  .fade-enter-active {
-    opacity: 1;
-    transition: opacity 500ms;
-  }
-  
-  .fade-exit {
-    opacity: 1;
-  }
-  
-  .fade-exit-active {
-    opacity: 0;
-    transition: opacity 500ms;
   }

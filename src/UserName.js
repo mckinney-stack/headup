@@ -1,34 +1,12 @@
 import { useEffect, useState } from 'react';
 // import { getDatabase, ref, get } from "firebase/database";
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 
-const slideDown = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(100vh);
-  }
-`;
-const slideUp = keyframes`
-  0% {
-    transform: translateY(100vh);
-  }
-  100% {
-    transform: translateY(0);
-  }
-`;
 
 const FormGroup = styled.div`
   width: 256px;
   margin: 0 auto;
-  animation: ${slideUp} 0.8s ease-in-out forwards;
-
-  ${props => props.$shouldHide && css`
-    animation: ${slideDown} 0.8s ease-in-out forwards;
-  `}
-
 `;
 
 const BsLabel = styled.label`
@@ -78,24 +56,11 @@ function handleSubmit(e) {
 
 
 
-export default function UserName({userName, setUserName, $shouldHide}) {
+export default function UserName({userName, setUserName}) {
 
   const [userNames, setUserNames] = useState([]);
   const [suggestion, setSuggestion] = useState('');
-  const [isHidden, setIsHidden] = useState(false);
-
-  useEffect(() => {
-    if ($shouldHide) {
-      const timerId = setTimeout(() => setIsHidden(true), 800); // Match the duration of the animation
-      return () => clearTimeout(timerId); // Clean up on unmount
-    } else {
-      setIsHidden(false);
-    }
-  }, [$shouldHide]);
-
-  if (isHidden) {
-    return null;
-  }
+ 
 
   // useEffect(() => {
   //   const db = getDatabase();
@@ -123,7 +88,7 @@ export default function UserName({userName, setUserName, $shouldHide}) {
 
 
   return (
-    <FormGroup className="form-group d-flex align-items-center" onSubmit={handleSubmit} $shouldHide={$shouldHide}>
+    <FormGroup className="form-group d-flex align-items-center" onSubmit={handleSubmit}>
       <BsLabel htmlFor="nameInput" className="mr-2">
         <FormattedMessage id="player" />
       </BsLabel>
