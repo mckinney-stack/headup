@@ -7,14 +7,17 @@ import { useContext } from 'react';
 import { LanguageContext } from './LanguageContext';
 import { FormattedMessage } from 'react-intl';
 import Language from './Language';
-import { StyledH1, StyledH1Number, StyledH6, StyledFaHockeyPuck } from './StyledComponents';
+import { StyledH1, PuckAndPlayContainer, containerVariants, H1HeadUp, StyledH6, HockeyPuck, CenteredContainer, StyledMobPuckContainer, WhiteStyledMobPuckContainer } from './StyledComponents';
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 // import { getDatabase, ref, set, get } from "firebase/database";
-import { styled } from 'styled-components';
 import { useIntl } from 'react-intl';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { motion, AnimatePresence, layout } from 'framer-motion';
+
+
+
 
 /*
 const firebaseConfig = {
@@ -32,15 +35,7 @@ const analytics = getAnalytics(app);
 const database = getDatabase(app);
 */
 
-const CenteredContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: space-around;
-  height: 50vh; 
-  text-align: center; 
-  margin-bottom: 96px;
-`;
+
 
 function App() {
 
@@ -62,6 +57,7 @@ function App() {
     const [isFirstRender, setIsFirstRender] = useState(true);
     const [userName, setUserName] = useState('');
     const [isPlayHovered, setIsPlayHovered] = useState(false);
+    const [hideInputs, setHideInputs] = useState(false);
 
 
     const userTime = formatTime(seconds, milliseconds);
@@ -102,7 +98,7 @@ function App() {
         return;
       }
 
-      setTimeout(() => {
+        setHideInputs(true);
         setIsFirstRender(false);
         setIsActive(!isActive);
         if (isActive) {
@@ -120,8 +116,7 @@ function App() {
             clearInterval(countdownIntervalRef.current);
           }, 3000);
         }, 400);
-      }, 1000);
-    }
+      }
 
   function formatTime(seconds, milliseconds) {
     const minutes = Math.floor(seconds / 60);
@@ -205,6 +200,7 @@ useEffect(() => {
         if (countdownTimeoutRef.current) {
           clearTimeout(countdownTimeoutRef.current);
         }
+        setHideInputs(false);
         setSeconds(0);
         setMilliseconds(0);
         setIsActive(false);
@@ -219,47 +215,70 @@ useEffect(() => {
   
     return (
       <>
-      <ToastContainer />
-      <CenteredContainer>
-        {isStarting ? (
-          <>
-            <StyledH6>
-              <FormattedMessage id="getReady" />
-            </StyledH6>
-            <StyledH1Number>{countdown}</StyledH1Number>
-          </>
-        ) : isActive ? (
-          <>
-            <StickhandleType types={types} type={type} setType={setType} isActive={isActive} />
-            <Counter number={number} updateNumber={updateNumber} isActive={isActive} />
-          </>
-        ) : isFirstRender ? (
-          <>
-          <StyledH1>
-                <FormattedMessage id="headUp" />
-                <StyledFaHockeyPuck />
+       <PuckAndPlayContainer
+        variants={containerVariants}
+        initial="initial"
+        animate={hideInputs ? "animate" : "exit"}
+       >
+        <ToastContainer />
+        <CenteredContainer>
+          {isStarting ? (
+            <>
+            <WhiteStyledMobPuckContainer>
+              <StyledH6>
+                <FormattedMessage id="getReady" />
+              </StyledH6>
+              <StyledH1 className={'countdown'}>{countdown}</StyledH1>
+            </WhiteStyledMobPuckContainer>
+            </>
+          ) : isActive ? (
+            <>
+              <StickhandleType types={types} type={type} setType={setType} isActive={isActive} />
+              <Counter number={number} updateNumber={updateNumber} isActive={isActive} />
+            </>
+          ) : isFirstRender ? (
+            <>
+            <StyledMobPuckContainer>
+                <H1HeadUp>
+                    HeadUp
+                    <HockeyPuck />
+                </H1HeadUp>
+              </StyledMobPuckContainer>
+            </>
+          ) : (
+            <StyledH1 className="gameOver">
+              <FormattedMessage id="gameOver" />
             </StyledH1>
-          </>
-        ) : (
-          <StyledH1 className="gameOver">
-            <FormattedMessage id="gameOver" />
-          </StyledH1>
-        )}
-       </CenteredContainer>
-       <Timer
-  userTime={userTime} 
-  isActive={isActive} 
-  isFirstRender={isFirstRender} 
-  handlePlay={handlePlay} 
-  handleStop={handleStop} 
-  handleReset={reset} 
-  userName={userName} 
-  isCountdownOver={isCountdownOver} 
-  onMouseEnter={() => setIsPlayHovered(true)} 
-  onMouseLeave={() => setIsPlayHovered(false)}
-/>        
-        <Language />
-        <UserName userName={userName} setUserName={setUserName} />
+          )}
+        </CenteredContainer>
+        <Timer
+    userTime={userTime} 
+    isActive={isActive} 
+    isFirstRender={isFirstRender} 
+    handlePlay={handlePlay} 
+    handleStop={handleStop} 
+    handleReset={reset} 
+    userName={userName} 
+    isCountdownOver={isCountdownOver} 
+    onMouseEnter={() => setIsPlayHovered(true)} 
+    onMouseLeave={() => setIsPlayHovered(false)}
+  />        
+  </PuckAndPlayContainer>
+        <AnimatePresence>
+          {!hideInputs ? (
+            <>
+            <motion.div
+            initial={{ opacity: 0, transform: 'translateY(100vw)' }}
+            animate={{ opacity: 1, transform: 'translateY(0)' }}
+    exit={{ transform: 'translateY(100vw)' }}
+    transition={{ duration: 0.4 }}
+  >
+                <Language />
+                <UserName userName={userName} setUserName={setUserName} />
+              </motion.div>
+            </>
+          ) : null}
+        </AnimatePresence>
       </>
     );
   }

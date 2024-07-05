@@ -137,16 +137,14 @@ Remember to handle the user's interaction with your application before playing a
 
 
 ### next steps: 
-1. Fix puck animation - currently coming in at the wrong location on mobile
-2. Attempt refactor on new branch using spring animations library, to keep things clean
-3. Make it responsive - so that it displays properly across multiple devices
-4. Use the database to create a "leaderboard" tab
-5. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
-6. Puck wobble animation on play button hover doesn't work very well on mobile - fix this
-7. Once user presses play, form field options should disappear
+1. Make it responsive - so that it displays properly across multiple devices
+2. Use the database to create a "leaderboard" tab
+4. Once user presses play, form field options should disappear
 
 ### nice to haves:
-1. enable websockets to control the app from a remote device such as a mobile or tablet device
+3. Puck wobble animation on play button hover doesn't work very well on mobile - fix this
+1. For portfolio: have a video pop-up that explains what the app is all about, with clips of people using the app on ice etc.
+2. enable websockets to control the app from a remote device such as a mobile or tablet device
 2. include video / animation for each stickhandle type on screen
 3. Train an AI to watch the person training through the camera, and identify when the person has fumbled the puck, then stop the clock
 4. Create animation when user presses play: Puck should wobble a little bit and then "HEAD UP" heading should exit the screen by moving up and out of sight, before countdown starts and the handlePlay function is triggered

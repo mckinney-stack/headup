@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import React, { useContext } from 'react';
+import styled from 'styled-components';
 import { LanguageContext } from './LanguageContext';
 import { FlagIcon } from 'react-flag-kit';
 
