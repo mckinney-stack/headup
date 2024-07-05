@@ -9,7 +9,7 @@ export const PuckAndPlayContainer = motion.div;
 export const containerVariants = {
   initial: { y: '0' },
   animate: { y: '12%', transition: { duration: 2 } },
-  exit: { y: '0', transition: { delay: 1 } },
+  exit: { y: '0' },
 };
 
 export const StyledH1 = styled.h1`
