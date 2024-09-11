@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { LanguageContext } from './LanguageContext';
 import { FormattedMessage } from 'react-intl';
 import Language from './Language';
-import { StyledH1, PuckAndPlayContainer, containerVariants, H1HeadUp, StyledH6, HockeyPuck, CenteredContainer, StyledMobPuckContainer, WhiteStyledMobPuckContainer } from './StyledComponents';
+import { StyledH1, PuckAndPlayContainer, containerVariants, H1HeadUp, StyledH6, HockeyPuck, CenteredContainer, StyledMobPuckContainer, StaticPuckContainer } from './StyledComponents';
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 // import { getDatabase, ref, set, get } from "firebase/database";
@@ -15,8 +15,6 @@ import { useIntl } from 'react-intl';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { motion, AnimatePresence, layout } from 'framer-motion';
-
-
 
 
 /*
@@ -224,17 +222,19 @@ useEffect(() => {
         <CenteredContainer>
           {isStarting ? (
             <>
-            <WhiteStyledMobPuckContainer>
+            <StaticPuckContainer>
               <StyledH6>
-                <FormattedMessage id="getReady" />
+                <FormattedMessage id="getReady"/>
               </StyledH6>
               <StyledH1 className={'countdown'}>{countdown}</StyledH1>
-            </WhiteStyledMobPuckContainer>
+            </StaticPuckContainer>
             </>
           ) : isActive ? (
             <>
               <StickhandleType types={types} type={type} setType={setType} isActive={isActive} />
-              <Counter number={number} updateNumber={updateNumber} isActive={isActive} />
+              <StaticPuckContainer>
+                <Counter number={number} updateNumber={updateNumber} isActive={isActive} />
+              </StaticPuckContainer>
             </>
           ) : isFirstRender ? (
             <>

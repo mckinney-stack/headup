@@ -7,11 +7,17 @@ import { FormattedMessage } from 'react-intl';
 const FormGroup = styled.div`
   width: 256px;
   margin: 0 auto;
+  justify-content: center;
 `;
 
 const BsLabel = styled.label`
   font-weight: 600;
   margin-right: 12px;
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    font-size: 12px;
+    margin-right: 8px;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -26,6 +32,10 @@ const BsInput = styled.input`
   
   &:active, &:focus {
     background-color: transparent !important;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    font-size: 12px;
   }
 
 `;
@@ -45,6 +55,10 @@ const BsUserInputShadow = styled.input`
     position: absolute !important;
     color: #adb5bd !important;
     z-index: -300;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    font-size: 12px;
   }
 
 `;

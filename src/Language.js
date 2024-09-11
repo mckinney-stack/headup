@@ -9,10 +9,18 @@ const LanguageContainer = styled.div`
   justify-content: center;
   flex-direction: row;
   margin-bottom: 16px;
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    margin-bottom: 12px;
+  }
 `;
 
 export const StyledSelect = styled.select`
   width: 128px;
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    font-size: 12px;
+  }
 `;
 
 const RectangularFlagIcon = styled(FlagIcon)`

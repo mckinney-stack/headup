@@ -10,7 +10,7 @@ function Counter({number, updateNumber, isActive}){
             intervalId = setInterval(() => {
                 let newNumber;
                 do {
-                    newNumber = Math.floor(Math.random() * 11);
+                    newNumber = Math.floor(Math.random() * 9);
                 } while (newNumber === previousNumber);
                 updateNumber(newNumber);
                 previousNumber = newNumber;

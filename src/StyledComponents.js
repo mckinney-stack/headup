@@ -8,15 +8,24 @@ export const PuckAndPlayContainer = motion.div;
 
 export const containerVariants = {
   initial: { y: '0' },
-  animate: { y: '12%', transition: { duration: 2 } },
+  animate: { y: '18%', transition: { duration: 2 } },
   exit: { y: '0' },
 };
+
 
 export const StyledH1 = styled.h1`
 
   &.countdown {
         font-size: 176px !important;
     }
+
+    @media (min-width: 1024px) and (max-width: 1440px) {
+
+      &.countdown {
+        font-size: 156px !important;
+    }
+    }
+  
 
     display: flex;
     align-items: baseline;
@@ -36,8 +45,20 @@ export const StyledH1 = styled.h1`
         font-size: 13.4vw;
     }
 
-    @media screen and (min-width: 1024px) and (max-width: 1920px) {
+    @media screen and (min-width: 1024px) {
+        font-size: 44px;
+
+        &.gameOver {
+          font-size: 124px;
+          margin-top: 56px;
+        }
+    }
+    @media screen and (min-width: 1440px) {
         font-size: 56px;
+
+        &.gameOver {
+          font-size: 152px;
+        }
     }
 `;
 
@@ -98,27 +119,53 @@ export const MobPuckContainer = styled(motion.div)`
         margin-right: 2vw;
         /* transform: rotate(4deg); */
     }
+
+    @media (min-width: 1024px) and (max-width: 1440px) {
+      height: 280px !important;
+      width: 280px !important;
+      border: 2px white solid;
+      box-shadow: 8px 16px #141414;
+      margin-right: 8px;  
+    }
+    @media (min-width: 1440px) and (max-width: 1920px) {
+      height: 360px;
+      width: 360px;
+      border: 3px white solid;
+      box-shadow: 8px 16px #141414;
+      margin-right: 8px;  
+    }
 `;
 
-export const WhiteStyledMobPuckContainer = styled(MobPuckContainer)`
+export const StaticPuckContainer = styled(MobPuckContainer)`
 
 flex-direction: column !important;
 justify-content: center; 
 
   @media (max-width: 768px) {
-        background-color: white !important;
-        color: black;
         padding: 2vw;
         border-radius: 100%;
         height: 88vw;
         width: 88vw;
         display: flex; 
-        flex-direction: column !important;
         justify-content: center; 
         align-items: center;
-        border: 0.9vw black solid;
         box-shadow: 2vw 4vw black;
         margin-right: 2vw;
+    }
+
+    @media (min-width: 1024px) and (max-width: 1440px) {
+      height: 280px !important;
+      width: 280px !important;
+      border: 2px white solid;
+      box-shadow: 8px 16px #141414;
+      margin-right: 8px;  
+    }
+    @media (min-width: 1440px) and (max-width: 1920px) {
+      height: 360px;
+      width: 360px;
+      border: 3px white solid;
+      box-shadow: 8px 16px #141414;
+      margin-right: 8px;  
     }
 `;
 
@@ -168,6 +215,12 @@ export const CenteredContainer = styled.div`
         margin-bottom: 14vw;
     }
 
+    @media (min-width: 1024px) and (max-width: 1440px) {
+      margin-top: 48px;
+      margin-bottom: 56px;
+      height: auto;
+  }
+
 `;
 
 
@@ -183,7 +236,14 @@ export const StyledH1Number = styled(StyledH1)`
         font-size: 63.8vw;
         line-height: 76.8vw;
     }
-    
+
+    @media (max-width: 768px) {
+      font-size: 184px;
+    }
+
+    @media (min-width: 1024px) and (max-width: 1440px) {
+      font-size: 156px;
+    }
 `;
 
 export const StyledH3 = styled.h3`
@@ -192,23 +252,56 @@ export const StyledH3 = styled.h3`
     font-weight: 600;
     margin: 0 auto;
     text-align: center;
+
+
+`;
+
+export const StickhandleTypeH3 = styled(StyledH3)`
+    position: fixed;
+    top: -124px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    font-size: 96px;
+    white-space: nowrap;
+    overflow: visible;
+    text-align: center;
+
+    @media (max-width: 768px) {
+      top: -26vw;
+      font-size: 14.9vw; 
+      line-height: 12.6vw;
+      white-space: normal;
+      width: 100%;
+    }
+
+    @media (min-width: 1024px) and (max-width: 1440px) {
+      position: fixed;
+      top: -92px;
+      width: auto;
+      font-size: 64px;
+    }
+
 `;
 
 export const StyledH6 = styled.h6`
     display: block;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 500;
     margin: 0 auto;
     text-align: center;
-    margin-bottom: 16px;
 
     @media (max-width: 768px) {
-        font-size: 20px;
-        margin-bottom: 4.4vw !important;
+        font-size: 16px;
     }
 
     @media (max-width: 480px) {
-        font-size: 20px;
+        font-size: 16px;
+    }
+
+    @media (min-width: 1024px) and (max-width: 1440px) {
+      font-size: 16px;
+
     }
 `;
 
@@ -218,9 +311,9 @@ export const StyledFaHockeyPuck = styled(FaHockeyPuck)`
   width: fit-content;
   
 
-  @media (max-width: 768px) {
+  @media (max-width: 1440px) {
     /* display: none; */
-    height: 36px;
+    height: 32px;
   }
 
   @media (max-width: 480px) {
@@ -236,6 +329,10 @@ const HockeyPuckWrapper = styled(motion.div)`
 
   @media (max-width: 768px) {
     margin-left: 20px;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1920px) {
+    margin-left: 16px;
   }
 `;
 
@@ -273,7 +370,7 @@ export const StyledFaHockeyPuckIn = styled(FaHockeyPuck)`
     top: 156px;
     margin-left: 40px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1440px) {
         height: 30px;
         margin-left: 20px;
     }
@@ -292,7 +389,7 @@ export const StyledFaHockeyPuckOut = styled(FaHockeyPuck)`
     top: 156px;
     margin-left: 40px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1440px) {
         height: 30px;
         margin-left: 20px;
     }
@@ -311,6 +408,10 @@ export const StyledTimer = styled.div`
   align-items: center;
   justify-content: center;
   width: 48px;
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    margin: 16px auto;
+  }
 `;
 
 
@@ -318,6 +419,11 @@ export const TimeDisplay = styled.div`
   display: inline-block;
   text-align: center;
   font-family: 'Space Mono', monospace;
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+      font-size: 12px;
+    }
+
 `;
 
 
@@ -335,6 +441,11 @@ export const StyledButton = styled.button.attrs(props => ({
     align-items: center;
     justify-content: space-between;
 
+    @media (min-width: 1024px) and (max-width: 1440px) {
+      font-size: 12px;
+      padding: 8px 40px;
+      margin-bottom: 4px;
+    }
   
     /* Styles based on id */
     background-color: ${props => {
