@@ -38,7 +38,8 @@ export const StyledLeaderboard = styled.div`
   padding: 20px;
   overflow-y: auto;
   scrollbar-width: thin;
-
+ 
+  
   h2 {
     display: inline-block !important;
     margin: 0;

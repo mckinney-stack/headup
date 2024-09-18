@@ -13,5 +13,6 @@
     "leftLeg": "Left Leg Only",
     "rightLeg": "Right Leg Only",
     "enterName": "Please enter your name to play!",
-    "enterFullName": "Please enter your full name to play!"
+    "enterFullName": "Please enter your full name to play!",
+    "leaderBoard": "Leaderboard"
 }

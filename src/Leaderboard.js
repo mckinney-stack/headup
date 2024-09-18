@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { ref, get, child } from "firebase/database";
 import { database } from './firebaseConfig';
 import { StyledLeaderboard, StyledLeaderboardBtn, StyledFlexContainer, buttonVariants } from './StyledComponents';   
-
+import { FormattedMessage } from 'react-intl';
 
 const Leaderboard = ({ isActive }) => {
   const [leaderboardData, setLeaderboardData] = useState([]);
@@ -55,11 +55,13 @@ const Leaderboard = ({ isActive }) => {
         animate="visible"
         variants={buttonVariants} 
         onClick={() => setIsOpen(!isOpen)}>
-        Leaderboard
+        <FormattedMessage id="leaderBoard"/>
       </StyledLeaderboardBtn>
       <StyledLeaderboard isOpen={isOpen}>
         <StyledFlexContainer>
-          <h2>Leaderboard</h2>
+          <h2>
+            <FormattedMessage id="leaderBoard"/>
+          </h2>
           <button style={{color: 'white'}} className="btn" onClick={() => setIsOpen(!isOpen)}>
           x
           </button>
