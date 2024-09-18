@@ -10,8 +10,8 @@
     "narrow": "Narrow",
     "figureEight": "Figure 8",
     "freestyle": "Freestyle",
-    "leftLeg": "Left Leg",
-    "rightLeg": "Right Leg",
+    "leftLeg": "Left Leg Only",
+    "rightLeg": "Right Leg Only",
     "enterName": "Please enter your name to play!",
     "enterFullName": "Please enter your full name to play!"
 }

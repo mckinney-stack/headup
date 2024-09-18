@@ -3,6 +3,63 @@ import { FaHockeyPuck } from "react-icons/fa6";
 import { motion } from 'framer-motion';
 import { useMediaQuery } from 'react-responsive';
 
+export const StyledLeaderboardBtn = styled(motion.button)`
+    position: fixed;
+    left: 32px;
+    top: 32px;
+    visibility: ${props => (props.isOpen ? 'hidden' : 'visible')};
+`;
+
+// Animation properties for StyledLeaderboardBtn
+export const buttonVariants = {
+  hidden: { opacity: 0, transition: { duration: 1 } },
+  visible: { opacity: 1, transition: { delay: 1.5, duration: 1 } }
+};
+
+export const StyledFlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-bottom: 16px;
+  align-items: center;
+`;
+
+export const StyledLeaderboard = styled.div`
+  position: fixed;
+  top: 0;
+  visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
+  left: ${props => (props.isOpen ? '0' : '-100%')};
+  width: 420px;
+  height: 100%;
+  background-color: black;
+  color: white;
+  z-index: 1000;
+  transition: left 0.2s ease-in-out;
+  padding: 20px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  h2 {
+    display: inline-block !important;
+    margin: 0;
+  }
+
+    button { 
+        color: white;
+        float: right;
+        font-weight: 600;
+    }
+
+    li {
+      text-align: left;
+      margin-bottom: 16px;
+
+      span {
+        font-weight: 600;
+       }
+    }
+
+`;
 
 export const PuckAndPlayContainer = motion.div;
 
@@ -88,7 +145,6 @@ export const H1HeadUp = ({ children, ...props }) => {
 };
 
 
-
 export const MobPuckContainer = styled(motion.div)`
 
         background-color: black;
@@ -124,7 +180,7 @@ export const MobPuckContainer = styled(motion.div)`
       height: 280px !important;
       width: 280px !important;
       border: 2px white solid;
-      box-shadow: 8px 16px #141414;
+      box-shadow: 8px 12px #141414;
       margin-right: 8px;  
     }
     @media (min-width: 1440px) and (max-width: 1920px) {
@@ -157,7 +213,7 @@ justify-content: center;
       height: 280px !important;
       width: 280px !important;
       border: 2px white solid;
-      box-shadow: 8px 16px #141414;
+      box-shadow: 8px 12px #141414;
       margin-right: 8px;  
     }
     @media (min-width: 1440px) and (max-width: 1920px) {
@@ -279,7 +335,7 @@ export const StickhandleTypeH3 = styled(StyledH3)`
       position: fixed;
       top: -92px;
       width: auto;
-      font-size: 64px;
+      font-size: 56px;
     }
 
 `;

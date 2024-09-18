@@ -137,9 +137,7 @@ Remember to handle the user's interaction with your application before playing a
 
 
 ### next steps: 
-1. Make it responsive - so that it displays properly across multiple devices
-2. Use the database to create a "leaderboard" tab
-4. Once user presses play, form field options should disappear
+1. Use the database to create a "leaderboard" tab
 
 ### nice to haves:
 3. Puck wobble animation on play button hover doesn't work very well on mobile - fix this
