@@ -1,7 +1,7 @@
 {
-  "name": "react-hockey-training-counter",
+  "name": "headup",
   "version": "0.1.0",
-  "homepage": "https://mckinney-stack.github.io/hockey-counter",
+  "homepage": "https://mckinney-stack.github.io/headup",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
